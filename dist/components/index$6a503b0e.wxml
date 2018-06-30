@@ -1,0 +1,20 @@
+<import src="card$5f1d1398" />
+<template name="index$6a503b0e">
+  <view class="_div data-v-5eca2e54 container" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-5eca2e54 userinfo" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+      <image class="_img data-v-5eca2e54 userinfo-avatar" wx:if="{{userInfo.avatarUrl}}" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <view class="_div data-v-5eca2e54 userinfo-nickname">
+        <template data="{{...$root[$kk+'0'], $root}}" is="card$5f1d1398"></template>
+      </view>
+    </view>
+    <view class="_div data-v-5eca2e54 usermotto">
+      <view class="_div data-v-5eca2e54 user-motto">
+        <template data="{{...$root[$kk+'1'], $root}}" is="card$5f1d1398"></template>
+      </view>
+    </view>
+    <form class="_form data-v-5eca2e54 form-container">
+      <input type="text" class="_input data-v-5eca2e54 form-control" value="{{motto}}" bindinput="handleProxy" placeholder="v-model" data-eventid="{{'1'}}" data-comkey="{{$k}}" />
+      <input type="text" class="_input data-v-5eca2e54 form-control" value="{{motto}}" bindblur="handleProxy" placeholder="v-model.lazy" data-eventid="{{'2'}}" data-comkey="{{$k}}" />
+    </form>
+  </view>
+</template>
