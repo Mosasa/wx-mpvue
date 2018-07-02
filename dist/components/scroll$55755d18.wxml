@@ -1,0 +1,22 @@
+<template name="scroll$55755d18">
+  <view class="_div data-v-d43f69de container-list">
+    <scroll-view class="_scroll-view data-v-d43f69de type-scroll" scroll-y>
+      <view class="_div data-v-d43f69de type-container">
+        <view class="_div data-v-d43f69de type-box" wx:key="item" key="{{item}}" wx:for="{{categories}}" wx:for-index="index" wx:for-item="item">
+          <view id="{{item.id}}" class="_div data-v-d43f69de type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}">{{item.name}}</view>
+        </view>
+      </view>
+    </scroll-view>
+    <scroll-view class="_scroll-view data-v-d43f69de goods-scroll" scroll-y>
+      <view class="_div data-v-d43f69de goods-container">
+        <view class="_div data-v-d43f69de goods-box" wx:key="item" key="{{item}}" data-id="{{item.id}}" bindtap="handleProxy" data-eventid="{{'1-'+index}}" data-comkey="{{$k}}" wx:for="{{goods}}" wx:for-index="index" wx:for-item="item">
+          <view class="_div data-v-d43f69de image-box">
+            <image src="{{item.pic}}" class="_image data-v-d43f69de"></image>
+          </view>
+          <label class="_span data-v-d43f69de goods-title">{{item.name}}</label>
+          <label class="_span data-v-d43f69de goods-price">¥{{item.minPrice}}</label>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</template>

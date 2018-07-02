@@ -1,28 +1,37 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
+    <div class="swiperList">
+      <swiper :text="motto"></swiper>
+    </div>
+    <div class="navTab">
+      <div class="recTab">
+        <text>ヾ(❀╹◡╹)ﾉ~为你推荐</text>
+    </div>
+    </div>
 
-    <div class="userinfo" @click="bindViewTap">
+    <!-- <div class="userinfo" @click="bindViewTap">
       <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
       <div class="userinfo-nickname">
         <card :text="userInfo.nickName"></card>
       </div>
     </div>
-
     <div class="usermotto">
       <div class="user-motto">
         <card :text="motto"></card>
       </div>
     </div>
-
     <form class="form-container">
       <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
+    </form> -->
+
   </div>
 </template>
 
 <script>
+import swiper from '../../components/swiper'
 import card from '@/components/card'
+
 
 export default {
   data () {
@@ -31,11 +40,10 @@ export default {
       userInfo: {}
     }
   },
-
   components: {
-    card
+    card,
+    'swiper':swiper
   },
-
   methods: {
     bindViewTap () {
       const url = '../logs/main'
@@ -66,6 +74,33 @@ export default {
 </script>
 
 <style scoped>
+.swiperList{
+  width: 100%;
+  height: 380rpx;
+  /* background: #888; */
+  position: absolute;
+  top: 0;
+}
+.navTab{
+  width: 100%;
+  height: 200rpx;
+  background: url('https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=330815385,1416866006&fm=27&gp=0.jpg');
+  background-size: 100%,180rpx;
+  margin-top: 180rpx;
+}
+.navTab .recTab{
+  width: 80%;
+  height: 140rpx;
+  background: #fff;
+  margin:18rpx auto;
+  text-align: center;
+  line-height: 160rpx;
+  font-size: 50rpx;
+  font-style:italic;
+  border: 1rpx solid #f0fff0;
+  border-width: 10rpx;
+  /* border-radius: 50rpx; */
+}
 .userinfo {
   display: flex;
   flex-direction: column;

@@ -1,0 +1,6 @@
+<import src="scroll$55755d18" />
+<template name="kinds$23299965">
+  <view class="_div data-v-3876d9fc">
+    <template data="{{...$root[$kk+'0'], $root}}" is="scroll$55755d18"></template>
+  </view>
+</template>

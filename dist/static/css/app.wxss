@@ -1,10 +1,23 @@
 
 .container {
   height: 100%;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -ms-flex-align: center;
   align-items: center;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
 }
+
+/* this rule will be remove */
+
+/* * {
+  transition: width 2s;
+  -moz-transition: width 2s;
+  -webkit-transition: width 2s;
+  -o-transition: width 2s;
+} */

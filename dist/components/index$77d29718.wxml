@@ -1,0 +1,13 @@
+<import src="swiper$260774c2" />
+<template name="index$77d29718">
+  <view class="_div data-v-386d90b5 container" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-386d90b5 swiperList">
+      <template data="{{...$root[$kk+undefined], $root}}" is="swiper$260774c2"></template>
+    </view>
+    <view class="_div data-v-386d90b5 navTab">
+      <view class="_div data-v-386d90b5 recTab">
+        <text class="_text data-v-386d90b5">ヾ(❀╹◡╹)ﾉ~为你推荐</text>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,25 +1,63 @@
 @import "/static/css/vendor.wxss";
 
-.userinfo.data-v-5eca2e54 {
+.swiperList.data-v-386d90b5 {
+  width: 100%;
+  height: 380rpx;
+  /* background: #888; */
+  position: absolute;
+  top: 0;
+}
+.navTab.data-v-386d90b5 {
+  width: 100%;
+  height: 200rpx;
+  background: url('https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=330815385,1416866006&fm=27&gp=0.jpg');
+  background-size: 100%,180rpx;
+  margin-top: 180rpx;
+}
+.navTab .recTab.data-v-386d90b5 {
+  width: 80%;
+  height: 140rpx;
+  background: #fff;
+  margin: 18rpx auto;
+  text-align: center;
+  line-height: 160rpx;
+  font-size: 50rpx;
+  font-style: italic;
+  border: 1rpx solid #f0fff0;
+  border-width: 10rpx;
+  /* border-radius: 50rpx; */
+}
+.userinfo.data-v-386d90b5 {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -ms-flex-align: center;
   align-items: center;
 }
-.userinfo-avatar.data-v-5eca2e54 {
+.userinfo-avatar.data-v-386d90b5 {
   width: 128rpx;
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
-.userinfo-nickname.data-v-5eca2e54 {
+.userinfo-nickname.data-v-386d90b5 {
   color: #aaa;
 }
-.usermotto.data-v-5eca2e54 {
+.usermotto.data-v-386d90b5 {
   margin-top: 300rpx;
 }
-.form-control.data-v-5eca2e54 {
+.form-control.data-v-386d90b5 {
   display: block;
   padding: 0 24rpx;
   margin-bottom: 10rpx;
   border: 2rpx solid #ccc;
+}
+.swiperList.data-v-a4d18188 {
+  width: 100%;
+  height: 380rpx;
+}
+.swiper-image.data-v-a4d18188 {
+  width: 100%;
+  height: 350rpx;
 }
