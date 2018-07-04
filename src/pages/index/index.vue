@@ -5,10 +5,14 @@
     </div>
     <div class="navTab">
       <div class="recTab">
-        <text>ヾ(❀╹◡╹)ﾉ~为你推荐</text>
+        <text>  ——  为你推荐  ——</text>
     </div>
     </div>
-
+    <scroll></scroll>
+    <div class="hot">
+      <span> —— 热门商品 ——</span>
+    </div>
+    <hot :v-text="motto"></hot>
     <!-- <div class="userinfo" @click="bindViewTap">
       <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
       <div class="userinfo-nickname">
@@ -24,25 +28,32 @@
       <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form> -->
-
+    <div class="fixed-img">
+      <img :src="fixImg" alt="" class="fix-img">
+    </div>
   </div>
 </template>
 
 <script>
 import swiper from '../../components/swiper'
 import card from '@/components/card'
+import scroll from '@/components/hotRecommend'
+import hot from '../../components/hotList'
 
 
 export default {
   data () {
     return {
       motto: 'Hello World',
+      fixImg:'/static/images/shoppingCar.png',
       userInfo: {}
     }
   },
   components: {
     card,
-    'swiper':swiper
+    'swiper':swiper,
+    'scroll':scroll,
+    'hot':hot
   },
   methods: {
     bindViewTap () {
@@ -73,7 +84,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.container{
+  overflow-y: scroll;
+  overflow-x:hidden;
+}
+.container::-webkit-scrollbar {display:none}
 .swiperList{
   width: 100%;
   height: 380rpx;
@@ -97,9 +113,31 @@ export default {
   line-height: 160rpx;
   font-size: 50rpx;
   font-style:italic;
-  border: 1rpx solid #f0fff0;
+  border: 1rpx solid #dcdcdc;
   border-width: 10rpx;
   /* border-radius: 50rpx; */
+}
+scroll{
+  overflow: scroll;
+}
+.hot{
+  width: 100%;
+  margin-top: 60rpx;
+  padding-bottom: 40rpx;
+  border-bottom: 1rpx solid #dcdcdc;
+  text-align: center;
+}
+.fixed-img .fix-img{
+  width: 80rpx;
+  height: 80rpx;
+  z-index: 2000;
+  position: fixed;
+  bottom: 180rpx;
+  right: 40rpx;
+}
+.hot span{
+  font-size: 16rpx;
+  
 }
 .userinfo {
   display: flex;
