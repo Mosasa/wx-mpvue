@@ -1,0 +1,25 @@
+<template name="hotList$46bb2af4">
+  <view class="_div data-v-cd013612 container-list">
+    <view class="_div data-v-cd013612 container-item" wx:key="item" key="{{item}}" data-id="{{item.id}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{goods}}" wx:for-index="index" wx:for-item="item">
+      <view class="_div data-v-cd013612 row">
+        <view class="_div data-v-cd013612 col">
+          <view class="_div data-v-cd013612 col-4">
+            <image src="{{item.pic}}" class="_img data-v-cd013612 col-img"></image>
+          </view>
+          <view class="_div data-v-cd013612 col-7">
+            <view class="_div data-v-cd013612 goods-title">{{item.name}}</view>
+            <view class="_div data-v-cd013612 status">
+              <label class="_span data-v-cd013612">库存0</label>
+              <label class="_span data-v-cd013612">月销0</label>
+              <label class="_span data-v-cd013612">赞0</label>
+            </view>
+            <view class="_div data-v-cd013612 goods-price">¥{{item.minPrice}}</view>
+          </view>
+          <view class="_div data-v-cd013612 col-1">
+            <image src="{{icon}}" alt class="_img data-v-cd013612 icon-img"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

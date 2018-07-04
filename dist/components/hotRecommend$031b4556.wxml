@@ -1,0 +1,15 @@
+<template name="hotRecommend$031b4556">
+  <scroll-view class="_scroll-view data-v-6dec559a goods-scroll" scroll-x="true">
+    <view class="_div data-v-6dec559a goods-container">
+      <view class="_div data-v-6dec559a goods-box" wx:key="item" key="{{item}}" data-id="{{item.id}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{goods}}" wx:for-index="index" wx:for-item="item">
+        <view class="_div data-v-6dec559a image-box">
+          <image src="{{item.pic}}" class="_image data-v-6dec559a"></image>
+        </view>
+        <view class="_div data-v-6dec559a goods-content">
+          <label class="_span data-v-6dec559a goods-title">{{item.name}}</label>
+          <label class="_span data-v-6dec559a goods-price">¥{{item.minPrice}}</label>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</template>

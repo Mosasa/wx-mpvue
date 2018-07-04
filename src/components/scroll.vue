@@ -84,7 +84,7 @@ export default {
    },
  }
 </script>
-<style>
+<style scoped>
 .container{
   min-height: 100%;
   background:#f2f2f2;
@@ -171,7 +171,7 @@ export default {
   width:280rpx;
   overflow:hidden;
   padding:18rpx 0;
-  color:#e64340;
+  color:#ff3366;
   font-size:24rpx;
   margin-left:12rpx;
 }

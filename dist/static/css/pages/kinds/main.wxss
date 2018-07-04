@@ -4,39 +4,39 @@ scroll {
   width: 100%;
   height: 1000rpx;
 }
-.container {
+.container.data-v-d43f69de {
   min-height: 100%;
   background: #f2f2f2;
 }
-.container-list {
+.container-list.data-v-d43f69de {
   display: -ms-flexbox;
   display: flex;
   height: 100%;
   /* background: #000; */
 }
-.type-scroll {
+.type-scroll.data-v-d43f69de {
   height: 100%;
   -ms-flex: 0 0 160rpx;
   flex: 0 0 160rpx;
 }
-.goods-scroll {
+.goods-scroll.data-v-d43f69de {
   height: 100%;
   -ms-flex: 1;
   flex: 1;
 }
-.type-container {
+.type-container.data-v-d43f69de {
   width: 160rpx;
   height: 100%;
   background: #f2f2f2;
   margin-top: 4rpx;
 }
-.type-navbar {
+.type-navbar.data-v-d43f69de {
   white-space: nowrap;
   display: -ms-flexbox;
   display: flex;
   height: 88rpx;
 }
-.type-box {
+.type-box.data-v-d43f69de {
   display: inline-block;
   width: 160rpx;
   line-height: 84rpx;
@@ -44,17 +44,17 @@ scroll {
   font-size: 24rpx;
   background: #f2f2f2;
 }
-.type-navbar-item {
+.type-navbar-item.data-v-d43f69de {
   border-bottom: 4rpx solid #fff;
 }
-.type-navbar-item {
+.type-navbar-item.data-v-d43f69de {
   border-bottom: 4rpx solid #fff;
 }
-.type-item-on {
+.type-item-on.data-v-d43f69de {
   border-left: 4rpx solid #e64340;
   background: #fff;
 }
-.goods-container {
+.goods-container.data-v-d43f69de {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -64,23 +64,23 @@ scroll {
   box-sizing: content-box;
   padding: 4rpx 10rpx 10rpx 0;
 }
-.goods-box {
+.goods-box.data-v-d43f69de {
   width: 49%;
   overflow: hidden;
   margin-bottom: 24rpx;
   background: #fff;
 }
-.goods-box .image-box {
+.goods-box .image-box.data-v-d43f69de {
   width: 100%;
   overflow: hidden;
   padding: 8rpx 8rpx 0rpx 8rpx;
   box-sizing: border-box;
 }
-.image-box image {
+.image-box image.data-v-d43f69de {
   width: 100%;
   height: 270rpx;
 }
-.goods-box .goods-title {
+.goods-box .goods-title.data-v-d43f69de {
   width: 256rpx;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -90,11 +90,11 @@ scroll {
   color: #000;
   margin: 0 12rpx;
 }
-.goods-box .goods-price {
+.goods-box .goods-price.data-v-d43f69de {
   width: 280rpx;
   overflow: hidden;
   padding: 18rpx 0;
-  color: #e64340;
+  color: #ff3366;
   font-size: 24rpx;
   margin-left: 12rpx;
 }

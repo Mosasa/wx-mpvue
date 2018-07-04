@@ -1,4 +1,6 @@
 <import src="swiper$260774c2" />
+<import src="hotRecommend$031b4556" />
+<import src="hotList$46bb2af4" />
 <template name="index$77d29718">
   <view class="_div data-v-386d90b5 container" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
     <view class="_div data-v-386d90b5 swiperList">
@@ -6,8 +8,16 @@
     </view>
     <view class="_div data-v-386d90b5 navTab">
       <view class="_div data-v-386d90b5 recTab">
-        <text class="_text data-v-386d90b5">ヾ(❀╹◡╹)ﾉ~为你推荐</text>
+        <text class="_text data-v-386d90b5"> —— 为你推荐 ——</text>
       </view>
+    </view>
+    <template data="{{...$root[$kk+'0'], $root}}" is="hotRecommend$031b4556"></template>
+    <view class="_div data-v-386d90b5 hot">
+      <label class="_span data-v-386d90b5"> —— 热门商品 ——</label>
+    </view>
+    <template data="{{...$root[$kk+'1'], $root}}" is="hotList$46bb2af4"></template>
+    <view class="_div data-v-386d90b5 fixed-img">
+      <image src="{{fixImg}}" alt class="_img data-v-386d90b5 fix-img"></image>
     </view>
   </view>
 </template>
