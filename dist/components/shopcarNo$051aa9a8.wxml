@@ -1,0 +1,8 @@
+<template name="shopcarNo$051aa9a8">
+  <view class="_div data-v-908f222a container">
+    <view class="_div data-v-908f222a noShop">
+      <view class="_div data-v-908f222a title-box"> {{goodsList.list.length}} 购物车空空如也 </view>
+      <view class="_div data-v-908f222a to-index-btn" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}"> 去逛逛 </view>
+    </view>
+  </view>
+</template>

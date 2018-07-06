@@ -41,7 +41,8 @@ export default {
           pagePath: "pages/order/main",
           iconPath: "static/images/order.png",
           selectedIconPath: "static/images/order1.png",
-          text: "购物车"
+          text: "购物车",
+          navigationBarTitleText: "购物车"
         },
         {
           pagePath: "pages/mine/main",

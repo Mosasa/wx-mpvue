@@ -1,3 +1,12 @@
+<import src="shopcarNo$051aa9a8" />
+<import src="shopCarHav$78cdda34" />
 <template name="order$c5dbead8">
-  <view class="_div data-v-5dad0431"></view>
+  <view class="_div data-v-5dad0431 container">
+    <view wx:if="{{goodsList.list.length<=0}}" class="_div data-v-5dad0431">
+      <template data="{{...$root[$kk+'0'], $root}}" is="shopcarNo$051aa9a8"></template>
+    </view>
+    <view wx:else class="_div data-v-5dad0431">
+      <template data="{{...$root[$kk+'1'], $root}}" is="shopCarHav$78cdda34"></template>
+    </view>
+  </view>
 </template>
