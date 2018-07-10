@@ -1,0 +1,6 @@
+<import src="swiper$260774c2" />
+<template name="goods-details$0f81e6d1">
+  <view class="_div data-v-140bf36e container">
+    <template data="{{...$root[$kk+'0'], $root}}" is="swiper$260774c2"></template>
+  </view>
+</template>

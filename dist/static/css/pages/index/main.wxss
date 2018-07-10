@@ -81,14 +81,6 @@ scroll {
   margin-bottom: 10rpx;
   border: 2rpx solid #ccc;
 }
-.swiperList.data-v-a4d18188 {
-  width: 100%;
-  height: 380rpx;
-}
-.swiper-image.data-v-a4d18188 {
-  width: 100%;
-  height: 350rpx;
-}
 .goods-container {
   display: -ms-flexbox;
   display: flex;

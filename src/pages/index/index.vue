@@ -1,7 +1,7 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
     <div class="swiperList">
-      <swiper :text="motto"></swiper>
+      <swiper :text="motto" :swiperList="swiperlist"></swiper>
     </div>
     <div class="navTab">
       <div class="recTab">
@@ -46,7 +46,24 @@ export default {
     return {
       motto: 'Hello World',
       fixImg:'/static/images/shoppingCar.png',
-      userInfo: {}
+      userInfo: {},
+      swiperlist:{
+                  item1:[{
+                        url: "https://img.alicdn.com/imgextra/i4/2406931838/TB1vHncSFXXXXcLapXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg"
+                    }],
+                    item2: [{
+                        url: "https://img.alicdn.com/imgextra/i2/101450072/TB1vZfxlDnI8KJjSszgXXc8ApXa_!!0-item_pic.jpg_430x430q90.jpg"
+                    }],
+                    item3: [{
+                        url: "https://img.alicdn.com/imgextra/i1/3085614114/TB19R9Ocgn.PuJjSZFkXXc_lpXa_!!0-item_pic.jpg_430x430q90.jpg"
+                    }],
+                    item4: [{
+                        url: "https://img.alicdn.com/imgextra/i1/2548289425/TB1brhyyVGWBuNjy0FbXXb4sXXa_!!0-item_pic.jpg_430x430q90.jpg"
+                    }],
+                    item5: [{
+                        url: "https://img.alicdn.com/imgextra/i3/3161150069/TB12lCTtY9YBuNjy0FgXXcxcXXa_!!0-item_pic.jpg_430x430q90.jpg"
+                    }]
+              }
     }
   },
   components: {

@@ -78,7 +78,7 @@ export default {
     },
     tabDetails(e){
       wx.navigateTo({
-        url: '../pages/goods-details/index?id='+e.currentTarget.dataset.id,
+        url: '../goods-details/main?id='+e.currentTarget.dataset.id,
       })
     }
    },
