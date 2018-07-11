@@ -1,0 +1,45 @@
+<template name="footerBox$4b951bd9">
+  <view class="_div data-v-039a3dc8 container">
+    <view class="_div data-v-039a3dc8 footer-box">
+      <view class="_div data-v-039a3dc8 shop-cart-btn" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+        <view class="_div data-v-039a3dc8 shop-num">{{shopNum}}</view> 购物车 </view>
+      <view class="_div data-v-039a3dc8 join-shop-cart" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">加入购物车</view>
+      <view class="_div data-v-039a3dc8 now-buy" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}">立即购买</view>
+    </view>
+    <view class="_div data-v-039a3dc8 show-popup" hidden="{{hideShopPopup}}">
+      <view class="_div data-v-039a3dc8 popup-mask" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}"></view>
+      <view class="_div data-v-039a3dc8 popup-contents">
+        <view class="_div data-v-039a3dc8 pop-goods-info">
+          <view class="_div data-v-039a3dc8 pop-img-box">
+            <image src="{{goodsDetail.pic}}" class="_image data-v-039a3dc8 goods-thumbnail"></image>
+          </view>
+          <view class="_div data-v-039a3dc8 pop-goods-des">
+            <view class="_div data-v-039a3dc8 pop-goods-title">{{goodsDetail.name}}</view>
+            <view class="_div data-v-039a3dc8 pop-goods-price">¥ {{selectSizePrice}}</view>
+          </view>
+          <view class="_div data-v-039a3dc8 pop-goods-close" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}"></view>
+        </view>
+        <view class="_div data-v-039a3dc8 size-label-box">
+          <view wx:key="x" key="{{x}}" wx:for="{{goodsDetail}}" wx:for-index="x" wx:for-item="property" class="_div data-v-039a3dc8">
+            <view class="_div data-v-039a3dc8 label">{{property.name}}</view>
+            <view class="_div data-v-039a3dc8 label-item-box">
+              <view class="_div data-v-039a3dc8 label-item {{item.active ? 'active' : ''}}" bindtap="handleProxy" wx:key="i" key="{{i}}" data-eventid="{{'5-'+x+'-'+i}}" data-comkey="{{$k}}" wx:for="{{property}}" wx:for-index="i" wx:for-item="p"> {{p.name}} </view>
+            </view>
+          </view>
+        </view>
+        <view class="_div data-v-039a3dc8 buy-num-box">
+          <view class="_div data-v-039a3dc8 num-label">购买数量</view>
+          <view class="_div data-v-039a3dc8 num-box">
+            <view class="_div data-v-039a3dc8 num-jian {{buyNumber == buyNumMin ? 'hui' : ''}}" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}">-</view>
+            <view class="_div data-v-039a3dc8 num-input">
+              <input type="number" value="{{buyNumber}}" disabled class="_input data-v-039a3dc8" />
+            </view>
+            <view class="_div data-v-039a3dc8 num-jia {{buyNumber == buyNumMax ? 'hui' : ''}}" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}">+</view>
+          </view>
+        </view>
+        <view wx:if="{{!isBuy}}" class="_div data-v-039a3dc8 popup-join-btn" bindtap="handleProxy" data-eventid="{{'9'}}" data-comkey="{{$k}}"> 加入购物车 </view>
+        <view wx:else class="_div data-v-039a3dc8 popup-join-btn" bindtap="handleProxy" data-eventid="{{'8'}}" data-comkey="{{$k}}"> 立即购买 </view>
+      </view>
+    </view>
+  </view>
+</template>

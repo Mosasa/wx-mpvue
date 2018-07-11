@@ -1,16 +1,33 @@
-<import src="../../wxParse/wxParse.wxml"/>
 <template>
   <div class="container">
-    <d-swiper :swiperList="swiperlist" :styleObject="styleobject"></d-swiper>
-   
+    <div class="swiper-list">
+      <d-swiper :swiperList="swiperlist" :styleObject="styleobject"></d-swiper>
+    </div>
+    <div class="goods-info">
+      <div class="goods-title">{{goodsDetail.name}}</div>
+      <div class="goods-price">¥ {{goodsDetail.minPrice}}</div>
+    </div>
+    <div class="goods-des-info">
+      <div class="goods-text">
+        <span>goods-describe</span>
+      </div>
+    </div>
+    <footer-box :hideShopPopup="hideShopPopup"></footer-box>
   </div>
 </template>
 <script>
 import swiper from '@/components/swiper'
+import footerBox from '@/components/footerBox'
 export default {
   data(){
     return {
-       swiperlist:{
+      goodsDetail:{
+        name:'',
+        minPrice:''
+      },//商品详情对象
+      shopCarInfo: {},//设置在缓存的购物车信息   
+      hideShopPopup: true, //规格弹出框
+      swiperlist:{
                   item1:[{
                         url: "https://img.alicdn.com/imgextra/i4/1987905011/TB2zQTdhborBKNjSZFjXXc_SpXa_!!1987905011-0-item_pic.jpg_430x430q90.jpg"
                     }],
@@ -27,14 +44,37 @@ export default {
                         url: "https://img.alicdn.com/imgextra/i2/2406931838/TB2wITFXY8kpuFjy0FcXXaUhpXa_!!2406931838.jpg_430x430q90.jpg"
                     }],
         },
-        styleobject:'width:100%;height:750rpx;position:absolute;top:0'
+      styleobject:'width:100%;height:750rpx;position:absolute;top:0;z-index:1000'
     }
   },
   components: {
     'd-swiper':swiper,
+    footerBox,
   },
-  mounted(){
+  onLoad: function(options){
     // console.log(this.styleobject)
+      // console.log(options)
+    wx.getStorage({
+      key: 'shopCarInfo',
+      success: function(res){
+        // success
+         // console.log(`initshopCarInfo:${res.data}`)
+        // this.shopCarInfo = res.data;
+        // this.shopNum = res.data.shopNum
+      }
+    })
+    wx.request({
+      url: 'http://localhost:3030/shop/goods/detail',
+      method: 'POST',
+      data: {
+        id: options.id
+      },
+      success: res =>{
+        console.log(res);
+        this.goodsDetail.name = res.data.data.basicInfo.name;
+        this.goodsDetail.minPrice = res.data.data.basicInfo.minPrice;
+      }
+    })
   }
 }
 </script>
@@ -42,13 +82,19 @@ export default {
 .container{
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: column;
+  flex-wrap: wrap;
 }
-d-swiper{
-  z-index: 1000;
+.swiper-list{
+ width: 100%;
+ height: 750rpx;
 }
 .goods-info{
   margin-bottom: 24rpx;
   width: 100%;
+  position: relative;
+  bottom: 200rpx;
 }
 .goods-info .goods-title{
   box-sizing: border-box;
@@ -103,65 +149,8 @@ d-swiper{
 .des-imgs image{
   width: 100%;
 }
-.row-arrow{
+.select-box{
   width: 100%;
-  box-sizing: border-box;
-  padding: 0  120rpx 0 35rpx;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   height: 102rpx;
-  font-size: 28rpx;
-  line-height: 102rpx;
-  margin-bottom: 28rpx;
-  background: #fff url(https://cdn.it120.cc/images/weappshop/arrow-right.png) no-repeat 697rpx center;
-  background-size: 18rpx auto;
-}
-.footer-box{
-  width: 100%;
-  height: 100rpx;
-  background-color: #fff;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  box-shadow:0 0 8rpx 0 ;
-}
-.footer-box .shop-cart-btn{
-  position: relative;
-  width: 150rpx;
-  height: 100%;
-  line-height: 100rpx;
-  text-align: center;
-  padding-top: 26rpx;
-  font-size:20rpx;
-  color:#acacb7;
-  box-sizing: border-box;
-  background:url("https://cdn.it120.cc/images/weappshop/cart.png") no-repeat center 21rpx;
-  background-size: 44rpx auto;
-}
-.footer-box .shop-cart-btn .shop-num{
-  position: absolute;
-  color:#e64340;
-  left: 80rpx;
-  top:-20rpx;
-}
-.footer-box .join-shop-cart{
-  text-align: center;
-  width: 300rpx;
-  height: 100%;
-  line-height: 100rpx;
-  background-color: #ff6850;
-  color:#fff;
-  font-size: 34rpx;
-}
-.footer-box .now-buy{
-  text-align: center;
-  height: 100%;
-  width: 300rpx;
-  line-height: 100rpx;
-  background-color: #e64340;
-  color:#fff;
-  font-size: 34rpx;
 }
 </style>

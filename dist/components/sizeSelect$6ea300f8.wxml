@@ -1,0 +1,20 @@
+<template name="sizeSelect$6ea300f8">
+  <view class="_div data-v-69c962a1 container">
+    <view wx:if="{{hasMoreSelect}}" class="_div data-v-69c962a1 row-arrow" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">{{selectSize}}</view>
+    <view class="_div data-v-69c962a1 show-popup" hidden="{{hideShopPopup}}">
+      <view class="_div data-v-69c962a1 popup-mask" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}"></view>
+      <view class="_div data-v-69c962a1 popup-contents">
+        <view class="_div data-v-69c962a1 pop-goods-info">
+          <view class="_div data-v-69c962a1 pop-img-box">
+            <image src="{{goodsDetail.basicInfo.pic}}" class="_img data-v-69c962a1 goods-thumbnail"></image>
+          </view>
+          <view class="_div data-v-69c962a1 pop-goods-des">
+            <view class="_div data-v-69c962a1 pop-goods--title">{{goodsDetail.basicInfo.name}}</view>
+            <view class="_div data-v-69c962a1 pop-goods-price">¥ {{selectSizePrice}}</view>
+          </view>
+          <view class="_div data-v-69c962a1 pop-goods-close" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

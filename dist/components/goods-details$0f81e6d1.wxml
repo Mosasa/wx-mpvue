@@ -1,6 +1,19 @@
 <import src="swiper$260774c2" />
+<import src="footerBox$4b951bd9" />
 <template name="goods-details$0f81e6d1">
   <view class="_div data-v-140bf36e container">
-    <template data="{{...$root[$kk+'0'], $root}}" is="swiper$260774c2"></template>
+    <view class="_div data-v-140bf36e swiper-list">
+      <template data="{{...$root[$kk+'0'], $root}}" is="swiper$260774c2"></template>
+    </view>
+    <view class="_div data-v-140bf36e goods-info">
+      <view class="_div data-v-140bf36e goods-title">{{goodsDetail.name}}</view>
+      <view class="_div data-v-140bf36e goods-price">¥ {{goodsDetail.minPrice}}</view>
+    </view>
+    <view class="_div data-v-140bf36e goods-des-info">
+      <view class="_div data-v-140bf36e goods-text">
+        <label class="_span data-v-140bf36e">goods-describe</label>
+      </view>
+    </view>
+    <template data="{{...$root[$kk+'1'], $root}}" is="footerBox$4b951bd9"></template>
   </view>
 </template>

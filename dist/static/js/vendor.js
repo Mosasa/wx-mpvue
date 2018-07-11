@@ -1,4 +1,4 @@
-global.webpackJsonp([3],{
+global.webpackJsonp([0],{
 
 /***/ 0:
 /***/ (function(module, exports) {
@@ -5719,20 +5719,162 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
 
-/***/ 17:
+/***/ 13:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 14:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_swiper_vue__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_a4d18188_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_swiper_vue__ = __webpack_require__(78);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    data() {
+        return {
+            styleObject: {
+                height: '100%',
+                width: '100%'
+            }
+        };
+    },
+    props: ['swiperList', 'url', 'styleObject'],
+    methods: {
+        choose() {
+            wx.showToast({
+                title: '待完善',
+                icon: 'success',
+                duration: 2000
+            });
+        }
+    },
+    mounted() {
+        console.log(this.styleObject);
+    }
+});
+
+/***/ }),
+
+/***/ 15:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    style: (_vm.styleObject)
+  }, [_c('swiper', {
+    staticClass: "swiperList",
+    style: (_vm.styleObject),
+    attrs: {
+      "autoplay": true,
+      "circular": true,
+      "indicator-dots": true,
+      "indicator-color": "rgba(228,228,228,1)",
+      "indicator-active-color": "#ff3366"
+    }
+  }, _vm._l((_vm.swiperList), function(items, i) {
+    return _c('swiper-item', {
+      key: i,
+      attrs: {
+        "mpcomid": '0-' + i
+      }
+    }, _vm._l((items), function(item, index) {
+      return _c('div', {
+        key: index,
+        staticClass: "swiper-info",
+        attrs: {
+          "eventid": '0-' + i + '-' + index
+        },
+        on: {
+          "click": _vm.choose
+        }
+      }, [_c('image', {
+        staticClass: "swiper-image",
+        style: (_vm.styleObject),
+        attrs: {
+          "src": item.url
+        }
+      })])
+    }))
+  }))], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-a4d18188", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 18:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = listToStyles;
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_swiper_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_a4d18188_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_swiper_vue__ = __webpack_require__(15);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(77)
+  __webpack_require__(13)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -5777,14 +5919,17 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 19:
+/***/ 26:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 27:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
-//
-//
 //
 //
 //
@@ -5795,41 +5940,43 @@ if (false) {(function () {
 //
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    data() {
-        return {
-            styleObject: {
-                height: '100%',
-                width: '100%'
-            }
-        };
-    },
-    props: ['swiperList', 'url', 'styleObject'],
-    methods: {
-        choose() {
-            wx.showToast({
-                title: '待完善',
-                icon: 'success',
-                duration: 2000
-            });
-        }
-    },
-    mounted() {
-        console.log(this.styleObject);
-    }
+  props: ['text']
 });
 
 /***/ }),
 
-/***/ 2:
+/***/ 28:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_card_vue__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_54fdbe58_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_card_vue__ = __webpack_require__(23);
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('p', {
+    staticClass: "card"
+  }, [_vm._v("\n    " + _vm._s(_vm.text) + "\n  ")])], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-54fdbe58", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_card_vue__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_54fdbe58_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_card_vue__ = __webpack_require__(28);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(21)
+  __webpack_require__(26)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -5874,55 +6021,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 21:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 22:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  props: ['text']
-});
-
-/***/ }),
-
-/***/ 23:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('p', {
-    staticClass: "card"
-  }, [_vm._v("\n    " + _vm._s(_vm.text) + "\n  ")])], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-54fdbe58", esExports)
-  }
-}
-
-/***/ }),
-
-/***/ 4:
+/***/ 5:
 /***/ (function(module, exports) {
 
 var g;
@@ -5950,7 +6049,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 62:
+/***/ 66:
 /***/ (function(module, exports) {
 
 /*
@@ -6033,13 +6132,13 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 63:
+/***/ 67:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["default"] = addStylesClient;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles__ = __webpack_require__(18);
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra
@@ -6263,105 +6362,6 @@ function applyToTag (styleElement, obj) {
   }
 }
 
-
-/***/ }),
-
-/***/ 64:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = listToStyles;
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-
-/***/ 77:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 78:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    style: (_vm.styleObject)
-  }, [_c('swiper', {
-    staticClass: "swiperList",
-    style: (_vm.styleObject),
-    attrs: {
-      "autoplay": true,
-      "circular": true,
-      "indicator-dots": true,
-      "indicator-color": "rgba(228,228,228,1)",
-      "indicator-active-color": "#ff3366"
-    }
-  }, _vm._l((_vm.swiperList), function(items, i) {
-    return _c('swiper-item', {
-      key: i,
-      attrs: {
-        "mpcomid": '0-' + i
-      }
-    }, _vm._l((items), function(item, index) {
-      return _c('div', {
-        key: index,
-        staticClass: "swiper-info",
-        attrs: {
-          "eventid": '0-' + i + '-' + index
-        },
-        on: {
-          "click": _vm.choose
-        }
-      }, [_c('image', {
-        staticClass: "swiper-image",
-        style: (_vm.styleObject),
-        attrs: {
-          "src": item.url
-        }
-      })])
-    }))
-  }))], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-a4d18188", esExports)
-  }
-}
 
 /***/ })
 
