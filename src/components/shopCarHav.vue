@@ -3,23 +3,24 @@
     <div class="shopBox">
       <div class="list-top">
         <div class="label">购物车</div>
-        <div class="edit-btn" @click="editTap" :hidden="!goodsList.saveHidden">完成</div>
+        <div class="edit-btn" @click="editTap" :hidden="!goodsList.saveHidden"></div>
+        <div class="edit-btn" @click="saveTap" :hidden="goodsList.saveHidden">完成</div>
       </div>
       <div class="goodsList">
-        <div class="a-goods" v-for=" item in goodsList.list" :key="item">
-          <div class="a-goods-conts" :class="item.active ? 'active': ''" @click="selectTap" @touchstart="touchS" @touchmove="touchM" @touchend="touchE" :data-index="index" :style="{marginLeft:item.left}">
+        <div class="a-goods" v-for="(list,index) in goodsList" :key="index">
+          <div class="a-goods-conts" :class="list.active ? 'active': ''" @click="selectTap" @touchstart="touchS" @touchmove="touchM" @touchend="touchE" :data-index="index" :style="{marginLeft:list.left}">
             <div class="goods-info">
               <div class="img-box">
-                <img src="item.pic" alt="" class="img">
+                <img :src="list.pic" alt="" class="img">
               </div>
               <div class="text-box">
-                <div class="goods-title">{{item.name}}</div>
-                <div class="goods-label">{{item.label}}</div>
-                <div class="goods-price">¥ {{item.price}}</div>
+                <div class="goods-title">{{list.name}}</div>
+                <div class="goods-label">{{list.label}}</div>
+                <div class="goods-price">¥ {{list.price}}</div>
                 <div class="buy-num">
-                  <div class="jian-btn" :class="item.number==1?'disabled':''" @onClick="jianBtnTap" :data-index="index">-</div>
-                  <input type="number" :value="item.number" disabled />
-                  <div class="jia-btn" :class="item.number==10?'disabled':''" @onClick="jiaBtnTap" :data-index="index">+</div>
+                  <div class="decrease-btn" :class="list.number==1?'disabled':''" @onClick="decreaseBtnTap" :data-index="index">-</div>
+                  <input type="number" :value="list.number" disabled />
+                  <div class="increase-btn" :class="list.number==10?'disabled':''" @onClick="increaseBtnTap" :data-index="index">+</div>
                 </div>
               </div>
             </div>
@@ -42,272 +43,292 @@
 export default {
   data(){
     return {
-      goodsList:{
-        saveHidden:true,
-        totalPrice: 0,
-        allSelect: true,
-        noSelect: false,
-        list: []
-      },
+      
     }
+  },
+  props:{
+    goodsList: {
+      type: Object
+    }
+  },
+  onShow: () => {
+      this.initEleWidth();
+      this.cartShow();
+      this.list[index].pic
   },
   methods: {
-    onShow: function(){
-    this.initEleWidth();
-    this.cartShow()
-  },
-  //获取元素自适应后的实际宽度
-    getEleWidth: function(w){
+    //获取元素自适应后的实际宽度
+    getEleWidth: function (w) {
       var real = 0;
-      try{
-        var res = wx.getSystemInfoSync()()  .windowWidth;
-       var scale = (750 / 2) / (w / 2);//以宽度750px设计稿做宽度的自适应
-        //console.log(scale);
+      try {
+        var res = wx.getSystemInfoSync().windowWidth;
+        var scale = (750 / 2) / (w / 2);  //以宽度750px设计稿做宽度的自适应
+        // console.log(scale);
         real = Math.floor(res / scale);
-       return real;    
-       }catch (e){
+        return real;
+      } catch (e) {
         return false;
-        //Do something when catch error
+       // Do something when catch error
        }
     },
-    initEleWidth:function() {
-    var delBtnWidth = this.getEleWidth(this.delBtnWidth);
-    this.delBtnWidth = delBtnWidth;
+    initEleWidth: function () {
+      var delBtnWidth = this.getEleWidth(this.delBtnWidth);
+      this.delBtnWidth =  delBtnWidth
     },
-    cartShow: function(){
-      var shopList = [];
-      //获取购物车数据
-      var shopCarInfoMem = wx.getStorageSync  ('shopCarInfo');
-      if(shopCarInfoMem && shopCarInfoMem.shopList){
-       shopList = shopCarInfoMem.shopList;
+    cartShow:function() {
+      var shoplist = [];
+      // 获取购物车数据
+      var shopCarInfoMem = wx.getStorageSync('shopCarInfo')
+      if (shopCarInfoMem && shopCarInfoMem.shoplist) {
+        shoplist = shopCarInfoMem.shoplist
       }
-      //this.totalPrice()
-      this.goodsList.list = shopList;
-     this.setGoodsList(this.getSaveHide(),this.totalPrice(),this.allSelect(),this.noSelect(),shopList);
+      // this.totalPrice()
+      this.goodsList.list = shoplist;
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), shoplist);
     },
-  getSaveHide:function() {
-    var saveHidden = this.goodsList.saveHidden;
-    return saveHidden;
-  },
-  allSelect: function(){
-    var list = this.goodsList.list;
-    var allSelect = false;
-    for(var i = 0; i < list.length; i++){
-      var curItem = list[i];
-      if(curItem.active){
-        allSelect = true
-      }else{
-        allSelect = false;
-        break;
-      }
-    }
-    return allSelect;
-  },
-  noSelect: function(){
-    var list = this.goodsList.list;
-    var noSelect =  false;
-    for(var i = 0; i < list.length; i++){
-      var curItem = list[i];
-      if(curItem.active){
-        noSelect = false;
-        break;
-      }else{
-        noSelect = false
-      }
-    }
-    return noSelect;
-  },
-  totalPrice: function(){
-    var list = this.goodsList.list;
-    var total = 0;
-    for(var i = 0; i < list.length; i++){
-      var curItem = list[i];
-      if(curItem.active){
-        total += parseFloat(curItem.price) * curItem.number;
-      }
-    }
-    return total;
-  },
-  selectTap(e){
-    var index = e.currentTarget.dataset.index;
-    var list = this.goodsList.list;
-    if(index!='' && index!==null){
-      list[parseInt(index)].active = !list[parseInt(index)].active;
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(),list)
-    }
-  },
-  bindAllSelect(){
-    var list = this.goodsList.list;
-    var currentAllSelect = this.goodsList.allSelect;
-    if(currentAllSelect){
-      list.forEach((item) => {
-        item.active = false;
-      })
-    }else{
-      list.forEach((item) => {
-        item.active = true;
-      })
-    }
-    this.setGoodsList(this.getSaveHide(), this.totalPrice(), !currentAllSelect, this.noSelect(), list);
-  },
-  saveHidden: function(){
-    return this.goodsList.saveHidden;
-  },
-  saveGoodsList: function(saveHidden, total, allSelect, noSelect, list){
-    this.goodsList =  {
-      saveHidden: saveHidden,
-      totalPrice: tatal,
-      allSelect: allSelect,
-      noSelect: noSelect,
-      list: list
-    };
-    var shopCarInfo = {};
-    var tempNumber = 0;
-    shopCarInfo.shop = list;
-    for(var i = 0; i < list.length; i++){
-      tempNumber = tempNumber + list[i].number
-    }
-    shopCarInfo.shopNum = tempNumber;
-    wx.setStorage({
-      key: 'shopCarInfo',
-      data: shopCarInfo,
-    })
-  },
-  jiaBtnTap(e){
-    var index = parseInt(e.currentTarget.dataset.index);
-    var list = this.goodsList.list;
-    if(index!= null && index !== '')
-      if(list[index].number < 10){
-        list[index].number++;
-        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(),this.noSelect(), list);
-
-      }
-  },
-  jianBtnTap(e){
-    var index = parseInt(e.currentTarget.dataset.index);
-    var list = this.goodsList.list;
-    if(index !== null && index !== '')
-      if(list[index].number > 1){
-        list[index].nuumber--;
-        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
-      }
-  },
-  touchS(e){
-    if(e.touches.length == 1){
-      this.startX = e.touches[0].clientX;
-    }
-  },
-  touchM(e){
-    var index = parseInt(e.currentTarget.dataset.index);
-    var left = ''
-    if(e.touches.length == 1){
-      var moveX = e.touches[0].clientX;
-      var disX = this.startX - moveX;
-      var btnWidth = 120;
-      if(disX <= 0){
-        left = 0
-      }else if(disX > 0){
-        left = `-${disX}rpx`;
-        if(disX >= btnWidth){
-          left = `-${btnWidth}rpx`
+    getSaveHide: function () {
+      var saveHidden = this.goodsList.saveHidden;
+      return saveHidden;
+    },
+    allSelect:function() {
+      var list = this.goodsList.list;
+      var allSelect = false
+      for (var i = 0; i < list.length; i++) {
+        var curItem = list[i]
+        if (curItem.active) {
+          allSelect = true
+        } else{
+          allSelect = false
+          break 
         }
       }
+      return allSelect
+    },
+    noSelect: function(){
       var list = this.goodsList.list;
-      if(index !== '' && index !==null){
-        list[index].left = left;
+      var noSelect = false
+      for (var i = 0; i < list.length; i++) {
+        var curItem = list[i]
+        if (curItem.active) {
+          noSelect = false
+          break
+        } else {
+          noSelect = false
+        }
+      }
+      return noSelect
+      /*return list.forEach((item) => {
+        if (item.active) {
+          return false
+        } else {
+          return true
+        }
+      })*/
+    },
+    totalPrice: function () {
+      var list = this.goodsList.list;
+      var total = 0;
+      for (var i = 0; i < list.length; i++) {
+        var curItem = list[i];
+        if (curItem.active) {
+          total += parseFloat(curItem.price) * curItem.number;
+        }
+      }
+      return total
+    },
+    toPayOrder(total) {
+      this.goodsList.totalPrice = total
+    },
+    selectTap(e) {
+      var index = e.currentTarget.dataset.index
+      var list = this.goodsList.list
+      if (index!=='' && index!==null){
+        list[parseInt(index)].active = !list[parseInt(index)].active
+        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list)
+      }
+    },
+    bindAllSelect() {
+      var list = this.goodsList.list;
+      var currentAllSelect = this.goodsList.allSelect
+      if (currentAllSelect) {
+        list.forEach((item) => {
+          item.active = false
+        })
+      } else {
+        list.forEach((item) => {
+          item.active = true
+        })
+      }
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), !currentAllSelect, this.noSelect(), list);
+    },
+    saveHidden:function() {
+      return this.goodsList.saveHidden
+    },
+    setGoodsList: function (saveHidden, total,  allSelect, noSelect, list) {
+      this.goodsList = {
+        saveHidden: saveHidden,
+        totalPrice: total,
+        allSelect: allSelect,
+        noSelect: noSelect,
+        list: list
+      }
+      var shopCarInfo = {};
+      var tempNumber = 0;
+      shopCarInfo.shoplist = list;
+
+      for (var i = 0; i < list.length; i++) {
+        tempNumber = tempNumber + list[i].number
+      }
+      shopCarInfo.shopNum = tempNumber;
+      wx.setStorage({
+        key: "shopCarInfo",
+        data: shopCarInfo
+      })
+    },
+    increaseBtnTap(e){
+      var index = parseInt(e.currentTarget.dataset.index)
+      var list = this.goodsList.list
+      if (index !== null && index !== '')
+        if (list[index].number<10) {
+        list[index].number++
         this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
       }
-    }
-  },
-  touchE(e){
-    var left = ''
-    var index = parseInt(e.currentTarget.dataset.index)
-    if (e.changedTouches.length == 1){
-      var endX = e.changedTouches[0].clientX
-      var disX = this.startX - endX
-      var btnWidth = 120
-      disX >= btnWidth/2 ? left = `-${btnWidth}rpx` : left = 0
-    }
-    var list = this.goodsList.list
-    if (index !== '' && index !== null) {
-      list[index].left = left
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
-    }
-  },
-  delItem(e){
-    var index = e.currentTarget.dataset.index;
-    var list = this.goodsList.list;
-    list.splice(index,1);
-    this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
-  },
-  editTap(){
-    var list = this.goodsList.list;
-    list.forEach((item) => {
-      item.active = false;
-    })
-    this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
-  },
-  saveTap(){
-    var list = this.goodsList.list;
-    list.forEach((item) => {
-      item.active = true;
-    })
-    this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
-  },
-  deleteSelected(){
-    var list = this.goodsList.list;
-    var newList = [];
-    list.forEach((item) => {
-      if(!item.active){
-        newList.push(item);
+    },
+    decreaseBtnTap(e) {
+      var index = parseInt(e.currentTarget.dataset.index)
+      var list = this.oodsList.list
+      if (index !== null && index !== '')
+        if (list[index].number > 1) {
+          list[index].number--
+          this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+        }
+    },
+    touchS(e) {
+      if (e.touches.length == 1){ 
+        this.startX = e.touches[0].clientX
       }
-    })
-    this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
-  },
-  toPayOrder(){
-    let that = this;
-    wx.showLoading()
-    if(this.goodsList.noSelect){
-      return
-    }
-    let shopList = [];
-    let DoneNUmber = 0;
-    let shopListMap = wx.getStorageSync('shopCarInfo')
-    if(shopListMap && shopListMap.shopList){
-      shopList = shopListMap.shopList;
-    }
-    if(shopList.length == 0){
-      return
-    }
-    let isFail = false;
-    let needDoneNUmber = 0;
-    for(var i = 0; i < shopList.length; i++){
-      console.log(isFail)
-      if(isFail){
-        wx.hideLoading()
-        console.log(333)
-        return;
+    },
+    touchM(e) {
+      var index = parseInt(e.currentTarget.dataset.index)
+      var left = ''
+      if(e.touches.length == 1){
+        var moveX = e.touches[0].clientX
+        var disX = this.startX - moveX
+        var btnWidth = 120
+        if (disX <= 0){
+          left = 0
+        } else if (disX>0 ){
+          left = `-${disX}rpx`
+          if (disX>=btnWidth){
+            left = `-${btnWidth}rpx`
+          }
+        }
+        var list = this.goodsList.list
+        if (index !== '' && index!==null){
+          list[index].left = "left"
+          this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+        }
       }
-      if(!shopList[i].active){
-        continue
+    },
+    touchE(e) {
+      var left = ''
+      var index = parseInt(e.currentTarget.dataset.index)
+      if (e.changedTouches.length == 1){
+        var endX = e.changedTouches[0].clientX
+        var disX = this.startX - endX
+        var btnWidth = 120
+        disX >= btnWidth/2 ? left = `-${btnWidth}rpx` : left = 0
       }
-      if(shopList[i].active){
-        needDoneNUmber++
+      var list = this.goodsList.list
+      if (index !== '' && index !== null) {
+        list[index].left = left
+        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
       }
-      let carShopBean = shopList[i];
+    },
+    delItem(e) {
+      var index = e.currentTarget.dataset.index
+      var list = this.goodsList.list
+      list.splice(index,1)
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
+    },
+    editTap(){
+      var list = this.goodsList.list
+      list.forEach((item)=>{
+        item.active = false
+      })
+      this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
+    },
+    saveTap(){
+      var list = this.goodsList.list
+      list.forEach((item) => {
+        item.active = true
+      })
+      this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
+    },
+    deleteSelected(){
+      var list = this.goodsList.list
+      var newList = []
+      list.forEach((item) => {
+        if (!item.active) {
+          newList.push(item)
+        }
+      })
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), newList); 
+    },
+    toPayOrder(){
+      wx.showLoading()
+      if (this.goodsList.noSelect){
+        return
+      }
+      let shopList = []
+      let DoneNUmber = 0
+      let shopListMap = wx.getStorageSync('shopCarInfo')
+      if (shopListMap && shopListMap.shoplist){
+        shopList = shopListMap.shoplist
+      }
+      if (shopList.length==0){
+        return
+      }
+      let isFail = false
+      let needDoneNUmber = 0
+      for (var i = 0; i < shopList.length;i++){
+        console.log(isFail)
+        if (isFail){
+          wx.hideLoading()
+          console.log(333)
+          return
+        }
+        if(!shopList[i].active){
+          continue
+        }
+        if (shopList[i].active) {
+          needDoneNUmber++
+        }
+        let carShopBean = shopList[i]
+      }
+      this.navToPayOrder();
+    },
+    navToPayOrder() {
+      wx.hideLoading()
+      wx.navigateTo({
+        url: "../to-pay-order/main"
+      })
+    },
+    toIndexPage () {
+      wx.switchTab({
+        url: "../kinds/main"
+      })
     }
-    tha.navToPayOrder();
-  },
-  navToPayOrder(){
-    wx.hideLoading()
-    wx.navigateTo({
-      url: '/pages/to-pay-order/index',
-    })
-  },
   }
 }
 </script>
 <style>
+.container{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin-top: -206rpx;
+}
 .list-top{
     width: 100%;
     height: 88rpx;
@@ -318,6 +339,7 @@ export default {
     padding: 0 30rpx;
     font-size: 28rpx;
     align-items: center;
+    background: #dd3366;
 }
 .list-top .label{
     color: #000;
@@ -329,7 +351,8 @@ export default {
 .goodsList{
     width: 100%;
     background-color: #fff;
-    padding-bottom: 100rpx;
+    margin-left:118rpx;
+    /* padding-bottom: 100rpx; */
 }
 .a-gooods{
     width: 100%;
@@ -399,7 +422,7 @@ export default {
     font-size: 24rpx;
     text-align: center
 }
-.goods-info .text-box .buy-num .jian-btn{
+.goods-info .text-box .buy-num .decrease-btn{
     width: 48rpx;
     height: 100%;
     border-left: 1rpx solid #ccc;
@@ -408,14 +431,14 @@ export default {
     border-bottom-left-radius: 6rpx;
     border-top-left-radius: 6rpx;
 }
-.goods-info .text-box .buy-num .jian-btn.disabled{
+.goods-info .text-box .buy-num .decrease-btn.disabled{
     background-color: #f5f5f9;
     border-left: 1rpx solid #eee;
     border-bottom: 1rpx solid #eee;
     border-top: 1rpx solid #eee;
     color: #ccc;
 }
-.goods-info .text-box .buy-num .jia-btn{
+.goods-info .text-box .buy-num .increase-btn{
     width: 48rpx;
     height: 100%;
     border-right: 1rpx solid #ccc;
@@ -424,7 +447,7 @@ export default {
     border-bottom-right-radius: 6rpx;
     border-top-right-radius: 6rpx;
 }
-.goods-info .text-box .buy-num .jia-btn.disabled{
+.goods-info .text-box .buy-num .increase-btn.disabled{
     background-color: #f5f5f9;
     border-right: 1rpx solid #eee;
     border-bottom: 1rpx solid #eee;

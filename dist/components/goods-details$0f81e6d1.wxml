@@ -11,7 +11,7 @@
     </view>
     <view class="_div data-v-140bf36e goods-des-info">
       <view class="_div data-v-140bf36e goods-text">
-        <label class="_span data-v-140bf36e">goods-describe</label>
+        <label class="_span data-v-140bf36e">{{goodsDetail.goodsDescribe}}</label>
       </view>
     </view>
     <template data="{{...$root[$kk+'1'], $root}}" is="footerBox$4b951bd9"></template>

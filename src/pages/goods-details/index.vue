@@ -9,10 +9,14 @@
     </div>
     <div class="goods-des-info">
       <div class="goods-text">
-        <span>goods-describe</span>
+        <span>{{goodsDetail.goodsDescribe}}</span>
       </div>
     </div>
-    <footer-box :hideShopPopup="hideShopPopup"></footer-box>
+    <footer-box :hideShopPopup="hideShopPopup" 
+    :goodsLabel="goodsLabel" 
+    :buyNumMin="buyNumMin" :buyNumMax="buyNumMax" :selectSizePrice="selectSizePrice" :propertyChildIds="propertyChildIds"
+    :propertyChildNames="propertyChildNames"
+    :shopCarInfo="shopCarInfo" :saveShopCar="saveShopCar"></footer-box>
   </div>
 </template>
 <script>
@@ -23,10 +27,23 @@ export default {
     return {
       goodsDetail:{
         name:'',
-        minPrice:''
+        minPrice:'',
+        goodsDescribe:''
       },//商品详情对象
+      goodsLabel:{
+        pic:'',
+        name:'',
+        selectSizePrice: 0,
+      },
+      saveShopCar: {},//需要保存到购物车的商品
+      propertyChildIds: '',//规格属性id
+      propertyChildNames: '',//规格属性名
       shopCarInfo: {},//设置在缓存的购物车信息   
       hideShopPopup: true, //规格弹出框
+      hasMoreSelect: false,//是否有多种规格可选
+      selectSizePrice: 0,//单个选择商品价格
+      buyNumMin: 0, //最小购买数量
+      buyNumMax: 0, //最大购买数量
       swiperlist:{
                   item1:[{
                         url: "https://img.alicdn.com/imgextra/i4/1987905011/TB2zQTdhborBKNjSZFjXXc_SpXa_!!1987905011-0-item_pic.jpg_430x430q90.jpg"
@@ -44,7 +61,7 @@ export default {
                         url: "https://img.alicdn.com/imgextra/i2/2406931838/TB2wITFXY8kpuFjy0FcXXaUhpXa_!!2406931838.jpg_430x430q90.jpg"
                     }],
         },
-      styleobject:'width:100%;height:750rpx;position:absolute;top:0;z-index:1000'
+      styleobject:'width:100%;height:750rpx;position:absolute;top:0;z-index:3'
     }
   },
   components: {
@@ -56,11 +73,11 @@ export default {
       // console.log(options)
     wx.getStorage({
       key: 'shopCarInfo',
-      success: function(res){
+      success: (res) =>{
         // success
-         // console.log(`initshopCarInfo:${res.data}`)
-        // this.shopCarInfo = res.data;
-        // this.shopNum = res.data.shopNum
+        console.log(`initshopCarInfo:${res.data}`)
+        this.shopCarInfo = res.data;
+        this.shopNum = res.data.shopNum
       }
     })
     wx.request({
@@ -70,9 +87,21 @@ export default {
         id: options.id
       },
       success: res =>{
-        console.log(res);
-        this.goodsDetail.name = res.data.data.basicInfo.name;
-        this.goodsDetail.minPrice = res.data.data.basicInfo.minPrice;
+        // console.log(res);
+        const dataInfo = res.data.data.basicInfo;
+        this.saveShopCar = dataInfo;
+        this.goodsDetail.name = dataInfo.name;
+        this.goodsDetail.minPrice = dataInfo.minPrice;
+        this.goodsDetail.goodsDescribe = dataInfo.characteristic;
+
+        let goodsLabel = this.goodsLabel
+        goodsLabel = res.data.data;
+        // console.log(goodsLabel);
+        this.selectSizePrice = dataInfo.minPrice;
+        this.goodsLabel.pic = dataInfo.pic;
+        this.goodsLabel.name = dataInfo.name;
+        this.buyNumMax = dataInfo.stores;
+        this.buyNumMin = (dataInfo.stores > 0) ? 1 : 0;
       }
     })
   }
@@ -141,7 +170,8 @@ export default {
   font-size:28rpx;
   color:#666666;
   line-height: 56rpx;
-  margin-bottom: 30rpx;
+  /* margin-bottom: 30rpx; */
+  margin-top:-150rpx;
 }
 .des-imgs{
   width:100%;

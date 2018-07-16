@@ -4,7 +4,7 @@
       <shop-car-no ></shop-car-no>
     </div>
     <div v-else>
-      <shop-car-hav ></shop-car-hav>
+      <shop-car-hav :goodsList="goodsList"></shop-car-hav>
     </div>
   </div>
 </template>
@@ -15,14 +15,52 @@ export default {
   data(){
     return {
       goodsList:{
-        list:[]
-      }
+        saveHidden:true,
+        totalPrice: 0,
+        allSelect: true,
+        noSelect: false,
+        list: []
+      },
     }
   },
   components: {
     'shop-car-no':shopCarNo,
     'shop-car-hav':shopCarHav
   },
+  onShow: function() {
+    wx.getStorage({
+      key: 'shopCarInfo',
+      success: res => {
+        // console.log(res)
+        this.goodsList.list = res.data.shoplist;
+        console.log(this.goodsList.list[0].pic)
+      }
+    })
+  },
+  methods: {
+   
+  //   saveGoodsList: function(saveHidden, total,   allSelect, noSelect, list){
+  //     this.goodsList =  {
+  //       saveHidden: saveHidden,
+  //       totalPrice: tatal,
+  //       allSelect: allSelect,
+  //       noSelect: noSelect,
+  //       list: list
+  //     };
+  //     var shopCarInfo = {};
+  //     var tempNumber = 0;
+  //     shopCarInfo.shoplist = list;
+  //     console.log(list);
+  //     for(var i = 0; i < list.length; i++){
+  //       tempNumber = tempNumber + list[i].number
+  //     }
+  //     shopCarInfo.shopNum = tempNumber;
+  //     wx.setStorage({
+  //       key: 'shopCarInfo',
+  //       data: shopCarInfo,
+  //   })
+  // },
+  }
 }
 </script>
 <style>

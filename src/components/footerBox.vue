@@ -5,7 +5,7 @@
         <div class="shop-num">{{shopNum}}</div>
         购物车
       </div>
-      <div class="join-shop-cart" @click="addShopCar">加入购物车</div>
+      <div class="join-shop-cart" @click="addBtn">加入购物车</div>
       <div class="now-buy" @click="tobuy">立即购买</div>
     </div>
     <div class="show-popup" :hidden="hideShopPopup" >
@@ -13,19 +13,19 @@
         <div class="popup-contents">
              <div class="pop-goods-info">
                 <div class="pop-img-box">
-                    <image :src="goodsDetail.pic" class="goods-thumbnail"/>
+                    <image :src="goodsLabel.pic" class="goods-thumbnail"/>
                 </div>
                 <div class="pop-goods-des">
-                    <div class="pop-goods-title">{{goodsDetail.name}}</div>
+                    <div class="pop-goods-title">{{goodsLabel.name}}</div>
                     <div class="pop-goods-price">¥ {{selectSizePrice}}</div>
                 </div>
                 <div class="pop-goods-close" @click="closePopupTap"></div>
              </div>
              <div class="size-label-box">
-                <div v-for="(property, x) in goodsDetail" :key="x">
+                <div v-for="(property, x) in goodsLabel" :key="x" v-if="property.name">
                 <div class="label">{{property.name}}</div> 
                 <div class="label-item-box">
-                    <div class="label-item" :class="item.active ? 'active' : '' " v-for="(p, i) in property" @click="labelItemTap" :key="i">
+                    <div class="label-item" :class="p.active ? 'active' : '' " v-for="(p, i) in property" @click="labelItemTap" :key="i" :data-propertyindex="idx" :data-propertyid="index" :data-propertyname="property.name" :data-propertychildindex="index" :data-propertychildid="p.id" :data-propertychildname="p.name">
                         {{p.name}}
                     </div> 
                 </div>
@@ -34,11 +34,11 @@
              <div class="buy-num-box">
                 <div class="num-label">购买数量</div>
                 <div class="num-box">
-                    <div class="num-jian" :class="buyNumber == buyNumMin ? 'hui': ''" @click="numJianTap">-</div>
+                    <div class="num-decrease" :class="buyNumber == buyNumMin ? 'hui': ''" @click="numdecreaseTap">-</div>
                     <div class="num-input">
                        <input  type="number" :value="buyNumber" disabled/>
                     </div>
-                    <div class="num-jia" :class="buyNumber== buyNumMax ? 'hui': ''" @click="numJiaTap">+</div>
+                    <div class="num-increase" :class="buyNumber== buyNumMax ? 'hui': ''" @click="numincreaseTap">+</div>
                 </div>
              </div>  
              <div v-if="!isBuy" class="popup-join-btn" @click="addShopCar">
@@ -57,23 +57,198 @@ export default {
   data(){
     return {
       shopNum:0,//全部购买数量
+      buyNumber: 0, //单个购买数量
       hasMoreSelect: false,//是否有多种规格可选
       selectSize:'选择:',//选择规格
+      //selectSizePrice: 0,单个选择商品价格
+      selectSize: '选择: ',//选择规格
+      canSubmit: false,//是否能添加到购物车,
+      isBuy: false
     }
   },
-  props:['hideShopPopup'],
+  props:{
+    goodsLabel: {
+      type: Object,
+    },
+    selectSizePrice: {
+      type: Number,
+    },
+    buyNumMax: {
+      type: Number,
+    },
+    buyNumMin: {
+      type: Number,
+    },
+    propertyChildIds: {
+      type: Number,
+    },
+    propertyChildNames: {
+      type: String
+    },
+    hideShopPopup: {
+      type: Boolean,
+      default() {
+        return true
+      }
+    },
+    shopCarInfo: {
+      type:Object
+    },
+    saveShopCar: {
+      type: Object
+    }
+  },
   methods: {
-    addShopCar(){
+    addBtn(){
       this.hideShopPopup = false;
     },
     closePopupTap(){
       this.hideShopPopup = true;
+    },
+    numincreaseTap(){
+    let buyNumber = this.buyNumber
+    if (buyNumber < this.buyNumMax){
+       buyNumber++
     }
+    // console.log(buyNumber)
+    this.buyNumber = buyNumber
+    },
+    numdecreaseTap() {
+      let buyNumber = this.buyNumber
+      if (buyNumber > this.buyNumMin) {
+      buyNumber--
+    }
+      this.buyNumber = buyNumber
   },
-  mounted(){
-    
+  labelItemTap(e){
+    console.log(e);
+    let propertyindex = e.currentTarget.dataset.propertyindex;
+    let propertiesArr = this.goodsLabel.property;
+    let curProperty = propertiesArr[propertyindex];
+    let curProperty_childs = curProperty.childsCurGoods;
+    for(let i = 0; i < curProperty_childs.length; i++){
+      curProperty_childs[i].active = false;
+    }
+    curProperty_childs[e.currentTarget.dataset.propertyid].active = true;
+    let needSelectNum = propertiesArr.length;
+    let curSelectNum = 0;
+    let propertyChildIds = '';
+    let propertyChildNames = '';
+    let canSubmit = false;
+    for(let i = 0; i < propertiesArr.length; i++){
+      canSelectNum++
+      let properties_childs = propertiesArr[i].childsCurGoods;
+      for(let j = 0; j < properties_childs.length; j++){
+        if(properties_childs[j].active){
+          properties_childs += propertiesArr[i].id + ':' +properties_childs[j].id + ',';
+          propertyChildNames += propertiesArr[i].name + properties_childs[j].name + ''
+        }
+      }
+    }
+    if(needSelectNum == curSelectNum){
+      canSubmit = true;
+    }
+    this.selectSizePrice = curProperty_childs[e.currentTarget.dataset.propertyid].price;
+    this.buyNumMax = 1000;
+    this.propertyChildIds = propertyChildIds;
+    this.propertyChildNames = propertyChildNames;
+    this.buyNumber = 1;
+    this.goodsLabel = this.goodsLabel;
+    this.canSubmit = canSubmit;
+  },
+  addShopCar(){
+    let shopCarMap = {};
+    const save = this.saveShopCar;
+    shopCarMap.goodsId = save.id;
+    shopCarMap.pic = save.pic;
+    shopCarMap.name = save.name;
+    shopCarMap.label = this.propertyChildNames;
+    shopCarMap.propertyChildIds = this.propertyChildIds;
+    shopCarMap.price = this.selectSizePrice;
+    shopCarMap.left = '';
+    shopCarMap.active = true;
+    shopCarMap.number = this.buyNumber;
+    shopCarMap.logisticsType = save.logisticsId;
+    shopCarMap.logistics = save.logistics;
+    this.closePopupTap();
+    var shopCarInfo = this.shopCarInfo;
+    if(!shopCarInfo.shopNum){
+      shopCarInfo.shopNum = 0
+    }
+    if(!shopCarInfo.shoplist){
+      shopCarInfo.shoplist = []
+    }
+    var hasSameGoodsindex = -1;
+    for(var i = 0; i < shopCarInfo.shoplist.length; i++){
+      var tamShopCarMap = shopCarInfo.shoplist[i];
+      if(tamShopCarMap.goodsId === shopCarMap.goodsId && shopCarMap.propertyChildIds == tamShopCarMap.propertyChildIds){
+        shopCarMap.number = shopCarMap.number + tamShopCarMap.number;
+        hasSameGoodsindex = i;
+        break;
+      }
+    }
+    shopCarInfo.shopNum = shopCarInfo.shopNum + this.buyNumber;
+    if(hasSameGoodsindex > -1){
+      shopCarInfo.shoplist.splice(hasSameGoodsindex, 1, shopCarMap)
+    } else {
+      shopCarInfo.shoplist.push(shopCarMap);
+    }
+    this.shopCarInfo = shopCarInfo;
+    this.shopNum = shopCarInfo.shopNum;
+    // this.closePopupTap();
+    wx.showToast({
+      title: '加入购物车🛒成功！',
+      icon: 'success',
+      duration: 2000
+    })
+    wx.setStorage({
+      key: 'shopCarInfo',
+      data: shopCarInfo,
+      success: function(res){
+        //success
+      }
+    })
+  },
+  tobuy(){
+    console.log(this.canSubmit);
+    if(this.buyNumber < 1){
+      wx.showModal({
+        title: '提示',
+        content: '暂时缺货哦',
+        showCancel: false
+      })
+      return
+    }
+    let shopCarMap = {};
+    const save = this.saveShopCar;
+    shopCarMap.goodsId = save.id;
+    shopCarMap.pic = save.pic;
+    shopCarMap.name = save.name;
+    shopCarMap.label = this.propertyChildNames;
+    shopCarMap.propertyChildIds = this.propertyChildIds;
+    shopCarMap.price = this.selectSizePrice;
+    shopCarMap.left = '';
+    shopCarMap.active = true;
+    shopCarMap.number = this.buyNumber;
+    shopCarMap.logisticsType = save.logisticsId;
+    shopCarMap.logistics = save.logistics;
+
+    wx.navigateTo({
+      url: `订单页面路径?detail=${JSON.stringify(shopCarMap)}`
+    })
+  },
+  goShopCar() {
+    wx.getStorage({
+      key: 'shopCarInfo',
+      success: function(res) {
+        console.log(res.data.shoplist)
+      }
+    })
+    wx.reLaunch({
+      url: '../order/main'
+    })
   }
-  // props:['shopNum']
+  },
 }
 </script>
 <style scoped>
@@ -223,6 +398,7 @@ export default {
    margin-left: 30rpx; 
    border-top: 1px solid #eee;
    margin-top: 30rpx;
+   margin-right:40rpx;
    align-items: center;
 }
 .num-label{
@@ -232,9 +408,9 @@ export default {
 .buy-num-box .num-box{
      display: flex;
 }
-.buy-num-box .num-box .num-jian,
+.buy-num-box .num-box .num-decrease,
 .buy-num-box .num-box .num-input,
-.buy-num-box .num-box .num-jia{
+.buy-num-box .num-box .num-increase{
   width: 80rpx;
   height: 64rpx;
   line-height: 62rpx;

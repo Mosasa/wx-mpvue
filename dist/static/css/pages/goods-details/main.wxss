@@ -65,7 +65,8 @@
   font-size: 28rpx;
   color: #666666;
   line-height: 56rpx;
-  margin-bottom: 30rpx;
+  /* margin-bottom: 30rpx; */
+  margin-top: -150rpx;
 }
 .des-imgs {
   width: 100%;
@@ -233,6 +234,7 @@
   margin-left: 30rpx;
   border-top: 2rpx solid #eee;
   margin-top: 30rpx;
+  margin-right: 40rpx;
   -ms-flex-align: center;
   align-items: center;
 }
@@ -244,9 +246,9 @@
   display: -ms-flexbox;
   display: flex;
 }
-.buy-num-box .num-box .num-jian.data-v-039a3dc8,
+.buy-num-box .num-box .num-decrease.data-v-039a3dc8,
 .buy-num-box .num-box .num-input.data-v-039a3dc8,
-.buy-num-box .num-box .num-jia.data-v-039a3dc8 {
+.buy-num-box .num-box .num-increase.data-v-039a3dc8 {
   width: 80rpx;
   height: 64rpx;
   line-height: 62rpx;

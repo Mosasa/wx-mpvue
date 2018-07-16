@@ -1,13 +1,13 @@
-global.webpackJsonp([1],{
+global.webpackJsonp([0],{
 
-/***/ 53:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(53);
 
 
 
@@ -16,16 +16,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 54:
+/***/ 53:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_5dad0431_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_5dad0431_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(64);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(55)
+  __webpack_require__(54)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -70,19 +70,19 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 55:
+/***/ 54:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 56:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_shopcarNo__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_shopCarHav__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_shopcarNo__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_shopCarHav__ = __webpack_require__(60);
 //
 //
 //
@@ -100,6 +100,10 @@ if (false) {(function () {
   data() {
     return {
       goodsList: {
+        saveHidden: true,
+        totalPrice: 0,
+        allSelect: true,
+        noSelect: false,
         list: []
       }
     };
@@ -107,21 +111,55 @@ if (false) {(function () {
   components: {
     'shop-car-no': __WEBPACK_IMPORTED_MODULE_0__components_shopcarNo__["a" /* default */],
     'shop-car-hav': __WEBPACK_IMPORTED_MODULE_1__components_shopCarHav__["a" /* default */]
+  },
+  onShow: function () {
+    wx.getStorage({
+      key: 'shopCarInfo',
+      success: res => {
+        // console.log(res)
+        this.goodsList.list = res.data.shoplist;
+        console.log(this.goodsList.list[0].pic);
+      }
+    });
+  },
+  methods: {
+
+    //   saveGoodsList: function(saveHidden, total,   allSelect, noSelect, list){
+    //     this.goodsList =  {
+    //       saveHidden: saveHidden,
+    //       totalPrice: tatal,
+    //       allSelect: allSelect,
+    //       noSelect: noSelect,
+    //       list: list
+    //     };
+    //     var shopCarInfo = {};
+    //     var tempNumber = 0;
+    //     shopCarInfo.shoplist = list;
+    //     console.log(list);
+    //     for(var i = 0; i < list.length; i++){
+    //       tempNumber = tempNumber + list[i].number
+    //     }
+    //     shopCarInfo.shopNum = tempNumber;
+    //     wx.setStorage({
+    //       key: 'shopCarInfo',
+    //       data: shopCarInfo,
+    //   })
+    // },
   }
 });
 
 /***/ }),
 
-/***/ 57:
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_shopcarNo_vue__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_908f222a_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_shopcarNo_vue__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_shopcarNo_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_908f222a_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_shopcarNo_vue__ = __webpack_require__(59);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(58)
+  __webpack_require__(57)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -166,14 +204,14 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 58:
+/***/ 57:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 59:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -210,7 +248,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 60:
+/***/ 59:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -244,16 +282,16 @@ if (false) {
 
 /***/ }),
 
-/***/ 61:
+/***/ 60:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_shopCarHav_vue__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_64b3f603_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_shopCarHav_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_shopCarHav_vue__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_64b3f603_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_shopCarHav_vue__ = __webpack_require__(63);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(62)
+  __webpack_require__(61)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -298,17 +336,20 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 62:
+/***/ 61:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 63:
+/***/ 62:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _this = this;
+
+//
 //
 //
 //
@@ -352,33 +393,31 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
-    return {
-      goodsList: {
-        saveHidden: true,
-        totalPrice: 0,
-        allSelect: true,
-        noSelect: false,
-        list: []
-      }
-    };
+    return {};
+  },
+  props: {
+    goodsList: {
+      type: Object
+    }
+  },
+  onShow: () => {
+    _this.initEleWidth();
+    _this.cartShow();
+    _this.list[index].pic;
   },
   methods: {
-    onShow: function () {
-      this.initEleWidth();
-      this.cartShow();
-    },
     //获取元素自适应后的实际宽度
     getEleWidth: function (w) {
       var real = 0;
       try {
-        var res = wx.getSystemInfoSync()().windowWidth;
+        var res = wx.getSystemInfoSync().windowWidth;
         var scale = 750 / 2 / (w / 2); //以宽度750px设计稿做宽度的自适应
-        //console.log(scale);
+        // console.log(scale);
         real = Math.floor(res / scale);
         return real;
       } catch (e) {
         return false;
-        //Do something when catch error
+        // Do something when catch error
       }
     },
     initEleWidth: function () {
@@ -386,15 +425,15 @@ if (false) {(function () {
       this.delBtnWidth = delBtnWidth;
     },
     cartShow: function () {
-      var shopList = [];
-      //获取购物车数据
+      var shoplist = [];
+      // 获取购物车数据
       var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
-      if (shopCarInfoMem && shopCarInfoMem.shopList) {
-        shopList = shopCarInfoMem.shopList;
+      if (shopCarInfoMem && shopCarInfoMem.shoplist) {
+        shoplist = shopCarInfoMem.shoplist;
       }
-      //this.totalPrice()
-      this.goodsList.list = shopList;
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), shopList);
+      // this.totalPrice()
+      this.goodsList.list = shoplist;
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), shoplist);
     },
     getSaveHide: function () {
       var saveHidden = this.goodsList.saveHidden;
@@ -427,6 +466,13 @@ if (false) {(function () {
         }
       }
       return noSelect;
+      /*return list.forEach((item) => {
+        if (item.active) {
+          return false
+        } else {
+          return true
+        }
+      })*/
     },
     totalPrice: function () {
       var list = this.goodsList.list;
@@ -439,10 +485,13 @@ if (false) {(function () {
       }
       return total;
     },
+    toPayOrder(total) {
+      this.goodsList.totalPrice = total;
+    },
     selectTap(e) {
       var index = e.currentTarget.dataset.index;
       var list = this.goodsList.list;
-      if (index != '' && index !== null) {
+      if (index !== '' && index !== null) {
         list[parseInt(index)].active = !list[parseInt(index)].active;
         this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
       }
@@ -464,39 +513,40 @@ if (false) {(function () {
     saveHidden: function () {
       return this.goodsList.saveHidden;
     },
-    saveGoodsList: function (saveHidden, total, allSelect, noSelect, list) {
+    setGoodsList: function (saveHidden, total, allSelect, noSelect, list) {
       this.goodsList = {
         saveHidden: saveHidden,
-        totalPrice: tatal,
+        totalPrice: total,
         allSelect: allSelect,
         noSelect: noSelect,
         list: list
       };
       var shopCarInfo = {};
       var tempNumber = 0;
-      shopCarInfo.shop = list;
+      shopCarInfo.shoplist = list;
+
       for (var i = 0; i < list.length; i++) {
         tempNumber = tempNumber + list[i].number;
       }
       shopCarInfo.shopNum = tempNumber;
       wx.setStorage({
-        key: 'shopCarInfo',
+        key: "shopCarInfo",
         data: shopCarInfo
       });
     },
-    jiaBtnTap(e) {
+    increaseBtnTap(e) {
       var index = parseInt(e.currentTarget.dataset.index);
       var list = this.goodsList.list;
-      if (index != null && index !== '') if (list[index].number < 10) {
+      if (index !== null && index !== '') if (list[index].number < 10) {
         list[index].number++;
         this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
       }
     },
-    jianBtnTap(e) {
+    decreaseBtnTap(e) {
       var index = parseInt(e.currentTarget.dataset.index);
-      var list = this.goodsList.list;
+      var list = this.oodsList.list;
       if (index !== null && index !== '') if (list[index].number > 1) {
-        list[index].nuumber--;
+        list[index].number--;
         this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
       }
     },
@@ -522,7 +572,7 @@ if (false) {(function () {
         }
         var list = this.goodsList.list;
         if (index !== '' && index !== null) {
-          list[index].left = left;
+          list[index].left = "left";
           this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
         }
       }
@@ -570,10 +620,9 @@ if (false) {(function () {
           newList.push(item);
         }
       });
-      this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), newList);
     },
     toPayOrder() {
-      let that = this;
       wx.showLoading();
       if (this.goodsList.noSelect) {
         return;
@@ -581,8 +630,8 @@ if (false) {(function () {
       let shopList = [];
       let DoneNUmber = 0;
       let shopListMap = wx.getStorageSync('shopCarInfo');
-      if (shopListMap && shopListMap.shopList) {
-        shopList = shopListMap.shopList;
+      if (shopListMap && shopListMap.shoplist) {
+        shopList = shopListMap.shoplist;
       }
       if (shopList.length == 0) {
         return;
@@ -604,12 +653,17 @@ if (false) {(function () {
         }
         let carShopBean = shopList[i];
       }
-      tha.navToPayOrder();
+      this.navToPayOrder();
     },
     navToPayOrder() {
       wx.hideLoading();
       wx.navigateTo({
-        url: '/pages/to-pay-order/index'
+        url: "../to-pay-order/main"
+      });
+    },
+    toIndexPage() {
+      wx.switchTab({
+        url: "../kinds/main"
       });
     }
   }
@@ -617,7 +671,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 64:
+/***/ 63:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -639,21 +693,30 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     on: {
       "click": _vm.editTap
     }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "edit-btn",
+    attrs: {
+      "hidden": _vm.goodsList.saveHidden,
+      "eventid": '1'
+    },
+    on: {
+      "click": _vm.saveTap
+    }
   }, [_vm._v("完成")])]), _vm._v(" "), _c('div', {
     staticClass: "goodsList"
-  }, _vm._l((_vm.goodsList.list), function(item, index) {
+  }, _vm._l((_vm.goodsList), function(list, index) {
     return _c('div', {
-      key: item,
+      key: index,
       staticClass: "a-goods"
     }, [_c('div', {
       staticClass: "a-goods-conts",
-      class: item.active ? 'active' : '',
+      class: list.active ? 'active' : '',
       style: ({
-        marginLeft: item.left
+        marginLeft: list.left
       }),
       attrs: {
         "data-index": index,
-        "eventid": '4-' + index
+        "eventid": '5-' + index
       },
       on: {
         "click": _vm.selectTap,
@@ -663,47 +726,55 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('div', {
       staticClass: "goods-info"
-    }, [_vm._m(0, true), _vm._v(" "), _c('div', {
+    }, [_c('div', {
+      staticClass: "img-box"
+    }, [_c('img', {
+      staticClass: "img",
+      attrs: {
+        "src": list.pic,
+        "alt": ""
+      }
+    })]), _vm._v(" "), _c('div', {
       staticClass: "text-box"
     }, [_c('div', {
       staticClass: "goods-title"
-    }, [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(list.name))]), _vm._v(" "), _c('div', {
       staticClass: "goods-label"
-    }, [_vm._v(_vm._s(item.label))]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(list.label))]), _vm._v(" "), _c('div', {
       staticClass: "goods-price"
-    }, [_vm._v("¥ " + _vm._s(item.price))]), _vm._v(" "), _c('div', {
+    }, [_vm._v("¥ " + _vm._s(list.price))]), _vm._v(" "), _c('div', {
       staticClass: "buy-num"
     }, [_c('div', {
-      staticClass: "jian-btn",
-      class: item.number == 1 ? 'disabled' : '',
-      attrs: {
-        "data-index": index,
-        "eventid": '1-' + index
-      },
-      on: {
-        "onClick": _vm.jianBtnTap
-      }
-    }, [_vm._v("-")]), _vm._v(" "), _c('input', {
-      attrs: {
-        "type": "number",
-        "value": item.number,
-        "disabled": ""
-      }
-    }), _vm._v(" "), _c('div', {
-      staticClass: "jia-btn",
-      class: item.number == 10 ? 'disabled' : '',
+      staticClass: "decrease-btn",
+      class: list.number == 1 ? 'disabled' : '',
       attrs: {
         "data-index": index,
         "eventid": '2-' + index
       },
       on: {
-        "onClick": _vm.jiaBtnTap
+        "onClick": _vm.decreaseBtnTap
+      }
+    }, [_vm._v("-")]), _vm._v(" "), _c('input', {
+      attrs: {
+        "type": "number",
+        "value": list.number,
+        "disabled": ""
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "increase-btn",
+      class: list.number == 10 ? 'disabled' : '',
+      attrs: {
+        "data-index": index,
+        "eventid": '3-' + index
+      },
+      on: {
+        "onClick": _vm.increaseBtnTap
       }
     }, [_vm._v("+")])])])]), _vm._v(" "), _c('div', {
       staticClass: "delete-btn",
       attrs: {
         "data-index": index,
-        "eventid": '3-' + index
+        "eventid": '4-' + index
       },
       on: {
         "onClick": _vm.delItem
@@ -717,7 +788,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "all-selected",
     class: _vm.goodsList.allSelect ? 'active' : '',
     attrs: {
-      "eventid": '5'
+      "eventid": '6'
     },
     on: {
       "click": _vm.bindAllSelect
@@ -731,7 +802,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "to-pay-btn",
     attrs: {
       "hidden": !_vm.goodsList.saveHidden,
-      "eventid": '6'
+      "eventid": '7'
     },
     on: {
       "click": _vm.toPayOrder
@@ -741,24 +812,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     class: _vm.noSelect ? 'no-select' : '',
     attrs: {
       "hidden": _vm.goodsList.saveHidden,
-      "eventid": '7'
+      "eventid": '8'
     },
     on: {
       "click": _vm.deleteSelectd
     }
   }, [_vm._v("删除")])])])])
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "img-box"
-  }, [_c('img', {
-    staticClass: "img",
-    attrs: {
-      "src": "item.pic",
-      "alt": ""
-    }
-  })])
-}]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -771,7 +832,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 65:
+/***/ 64:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -784,6 +845,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1) : _c('div', [_c('shop-car-hav', {
     attrs: {
+      "goodsList": _vm.goodsList,
       "mpcomid": '1'
     }
   })], 1)])
@@ -801,5 +863,5 @@ if (false) {
 
 /***/ })
 
-},[53]);
+},[52]);
 //# sourceMappingURL=main.js.map

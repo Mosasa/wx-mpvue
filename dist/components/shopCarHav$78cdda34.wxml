@@ -3,38 +3,39 @@
     <view class="_div data-v-64b3f603 shopBox">
       <view class="_div data-v-64b3f603 list-top">
         <view class="_div data-v-64b3f603 label">购物车</view>
-        <view class="_div data-v-64b3f603 edit-btn" bindtap="handleProxy" hidden="{{!goodsList.saveHidden}}" data-eventid="{{'0'}}" data-comkey="{{$k}}">完成</view>
+        <view class="_div data-v-64b3f603 edit-btn" bindtap="handleProxy" hidden="{{!goodsList.saveHidden}}" data-eventid="{{'0'}}" data-comkey="{{$k}}"></view>
+        <view class="_div data-v-64b3f603 edit-btn" bindtap="handleProxy" hidden="{{goodsList.saveHidden}}" data-eventid="{{'1'}}" data-comkey="{{$k}}">完成</view>
       </view>
       <view class="_div data-v-64b3f603 goodsList">
-        <view class="_div data-v-64b3f603 a-goods" wx:key="item" key="{{item}}" wx:for="{{goodsList.list}}" wx:for-index="index" wx:for-item="item">
-          <view class="_div data-v-64b3f603 a-goods-conts {{item.active ? 'active' : ''}}" bindtap="handleProxy" bindtouchstart="handleProxy" bindtouchmove="handleProxy" bindtouchend="handleProxy" data-index="{{index}}" data-eventid="{{'4-'+index}}" data-comkey="{{$k}}"
-            style=" {{('margin-left:' + item.left + ';')}}">
+        <view class="_div data-v-64b3f603 a-goods" wx:key="index" key="{{index}}" wx:for="{{goodsList}}" wx:for-index="index" wx:for-item="list">
+          <view class="_div data-v-64b3f603 a-goods-conts {{list.active ? 'active' : ''}}" bindtap="handleProxy" bindtouchstart="handleProxy" bindtouchmove="handleProxy" bindtouchend="handleProxy" data-index="{{index}}" data-eventid="{{'5-'+index}}" data-comkey="{{$k}}"
+            style=" {{('margin-left:' + list.left + ';')}}">
             <view class="_div data-v-64b3f603 goods-info">
               <view class="_div data-v-64b3f603 img-box">
-                <image src="item.pic" alt class="_img data-v-64b3f603 img"></image>
+                <image src="{{list.pic}}" alt class="_img data-v-64b3f603 img"></image>
               </view>
               <view class="_div data-v-64b3f603 text-box">
-                <view class="_div data-v-64b3f603 goods-title">{{item.name}}</view>
-                <view class="_div data-v-64b3f603 goods-label">{{item.label}}</view>
-                <view class="_div data-v-64b3f603 goods-price">¥ {{item.price}}</view>
+                <view class="_div data-v-64b3f603 goods-title">{{list.name}}</view>
+                <view class="_div data-v-64b3f603 goods-label">{{list.label}}</view>
+                <view class="_div data-v-64b3f603 goods-price">¥ {{list.price}}</view>
                 <view class="_div data-v-64b3f603 buy-num">
-                  <view class="_div data-v-64b3f603 jian-btn {{item.number == 1 ? 'disabled' : ''}}" bindonClick="handleProxy" data-index="{{index}}" data-eventid="{{'1-'+index}}" data-comkey="{{$k}}">-</view>
-                  <input type="number" value="{{item.number}}" disabled class="_input data-v-64b3f603" />
-                  <view class="_div data-v-64b3f603 jia-btn {{item.number == 10 ? 'disabled' : ''}}" bindonClick="handleProxy" data-index="{{index}}" data-eventid="{{'2-'+index}}" data-comkey="{{$k}}">+</view>
+                  <view class="_div data-v-64b3f603 decrease-btn {{list.number == 1 ? 'disabled' : ''}}" bindonClick="handleProxy" data-index="{{index}}" data-eventid="{{'2-'+index}}" data-comkey="{{$k}}">-</view>
+                  <input type="number" value="{{list.number}}" disabled class="_input data-v-64b3f603" />
+                  <view class="_div data-v-64b3f603 increase-btn {{list.number == 10 ? 'disabled' : ''}}" bindonClick="handleProxy" data-index="{{index}}" data-eventid="{{'3-'+index}}" data-comkey="{{$k}}">+</view>
                 </view>
               </view>
             </view>
-            <view class="_div data-v-64b3f603 delete-btn" data-index="{{index}}" bindonClick="handleProxy" data-eventid="{{'3-'+index}}" data-comkey="{{$k}}">删除</view>
+            <view class="_div data-v-64b3f603 delete-btn" data-index="{{index}}" bindonClick="handleProxy" data-eventid="{{'4-'+index}}" data-comkey="{{$k}}">删除</view>
           </view>
         </view>
       </view>
       <view class="_div data-v-64b3f603 jiesuan-box">
         <view class="_div data-v-64b3f603 left-price">
-          <view class="_div data-v-64b3f603 all-selected {{goodsList.allSelect ? 'active' : ''}}" bindtap="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}">全选</view>
+          <view class="_div data-v-64b3f603 all-selected {{goodsList.allSelect ? 'active' : ''}}" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}">全选</view>
           <view class="_div data-v-64b3f603 total" hidden="{{noSelect}}">合计：¥{{goodsList.totalPrice}}</view>
         </view>
-        <view class="_div data-v-64b3f603 to-pay-btn" bindtap="handleProxy" hidden="{{!goodsList.saveHidden}}" data-eventid="{{'6'}}" data-comkey="{{$k}}">去结算</view>
-        <view class="_div data-v-64b3f603 to-pay-btn {{noSelect ? 'no-select' : ''}}" hidden="{{goodsList.saveHidden}}" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}">删除</view>
+        <view class="_div data-v-64b3f603 to-pay-btn" bindtap="handleProxy" hidden="{{!goodsList.saveHidden}}" data-eventid="{{'7'}}" data-comkey="{{$k}}">去结算</view>
+        <view class="_div data-v-64b3f603 to-pay-btn {{noSelect ? 'no-select' : ''}}" hidden="{{goodsList.saveHidden}}" bindtap="handleProxy" data-eventid="{{'8'}}" data-comkey="{{$k}}">删除</view>
       </view>
     </view>
   </view>
