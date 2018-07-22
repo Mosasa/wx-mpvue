@@ -17,7 +17,9 @@
   color: #999;
   background: url(https://cdn.it120.cc/images/weappshop/icon-cart.png) no-repeat center 205rpx;
   background-size: 100rpx auto;
-  margin-bottom: 50rpx;
+  /* margin-bottom: 50rpx; */
+  margin-bottom: -98rpx;
+  padding-top: 298rpx;
 }
 .to-index-btn {
   color: #fff;
@@ -29,6 +31,7 @@
   text-align: center;
   font-size: 28rpx;
   margin: 0 auto;
+  margin-top: 172rpx;
 }
 .container {
   width: 100%;
@@ -49,14 +52,21 @@
   font-size: 28rpx;
   -ms-flex-align: center;
   align-items: center;
-  background: #dd3366;
+  /* background: #dd3366; */
 }
 .list-top .label {
-  color: #000;
+  color: #ff3366;
+  font-size: 46rpx;
+  margin-left: 102rpx;
+  margin-top: 26rpx;
+  font-weight: bold;
 }
 .list-top .edit-btn {
   color: #999;
   height: 100%;
+  margin-right: 124rpx;
+  font-size: 42rpx;
+  margin-top: 32rpx;
 }
 .goodsList {
   width: 100%;

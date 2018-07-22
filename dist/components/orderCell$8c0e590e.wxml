@@ -1,0 +1,11 @@
+<template name="orderCell$8c0e590e">
+  <view class="_div data-v-6c9698bc order">
+    <view wx:key="item" key="{{item}}" wx:for="{{orderCell}}" wx:for-index="index" wx:for-item="item" class="_div data-v-6c9698bc">
+      <navigator hover-class="none" url="{{item.url}}" class="_navigator data-v-6c9698bc order-cell">
+        <image src="{{item.icon}}" class="_img data-v-6c9698bc {{item.class}}"></image>
+        <view class="_div data-v-6c9698bc badge" wx:if="{{item.count > 0}}">{{item.count}}</view>
+        <view class="_div data-v-6c9698bc">{{item.text}}</view>
+      </navigator>
+    </view>
+  </view>
+</template>

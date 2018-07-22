@@ -43,7 +43,11 @@ export default {
     color:#999;
     background: url(https://cdn.it120.cc/images/weappshop/icon-cart.png) no-repeat center 205rpx;
     background-size: 100rpx auto;
-    margin-bottom: 50rpx;
+    /* margin-bottom: 50rpx; */
+    margin-bottom:-98rpx;
+    padding-top:298rpx;
+
+
 }
 .to-index-btn{
     color:#fff;
@@ -54,6 +58,7 @@ export default {
     line-height: 70rpx;
     text-align: center;
     font-size:28rpx;
-    margin:0 auto
+    margin:0 auto;
+    margin-top:172rpx;
 }
 </style>

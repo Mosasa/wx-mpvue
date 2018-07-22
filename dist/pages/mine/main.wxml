@@ -1,2 +1,1 @@
-<!--pages/mine/main.wxml-->
-<text>pages/mine/main.wxml</text>
+<import src="../../components/mine$7a6638a3" /><template is="mine$7a6638a3" data="{{ ...$root['0'], $root }}"/>

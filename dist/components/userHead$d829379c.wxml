@@ -1,0 +1,10 @@
+<template name="userHead$d829379c">
+  <view class="_div data-v-cca32ae2 container">
+    <view class="_div data-v-cca32ae2 info">
+      <view class="_div data-v-cca32ae2 info-wrap">
+        <image class="_img data-v-cca32ae2 info-icon" src="{{userInfo.avatarUrl}}" bindtap="handleProxy" data-url-type="userinfo" open-type="getUserInfo" data-eventid="{{'0'}}" data-comkey="{{$k}}"></image>
+        <view class="_div data-v-cca32ae2 info-name">{{userInfo.nickName}}</view>
+      </view>
+    </view>
+  </view>
+</template>

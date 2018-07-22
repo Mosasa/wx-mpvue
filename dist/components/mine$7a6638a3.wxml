@@ -1,0 +1,14 @@
+<import src="userHead$d829379c" />
+<import src="myOrder$d1cafc2a" />
+<import src="orderCell$8c0e590e" />
+<template name="mine$7a6638a3">
+  <view class="_div data-v-ac31d134 container">
+    <template data="{{...$root[$kk+'0'], $root}}" is="userHead$d829379c"></template>
+    <view class="_div data-v-ac31d134">
+      <template data="{{...$root[$kk+'1'], $root}}" is="myOrder$d1cafc2a"></template>
+    </view>
+    <view class="_div data-v-ac31d134">
+      <template data="{{...$root[$kk+'2'], $root}}" is="orderCell$8c0e590e"></template>
+    </view>
+  </view>
+</template>

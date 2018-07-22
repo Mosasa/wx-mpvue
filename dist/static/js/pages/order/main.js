@@ -1,13 +1,13 @@
-global.webpackJsonp([0],{
+global.webpackJsonp([1],{
 
-/***/ 52:
+/***/ 69:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(70);
 
 
 
@@ -16,16 +16,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 53:
+/***/ 70:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_5dad0431_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_5dad0431_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(81);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(54)
+  __webpack_require__(71)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -70,19 +70,21 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 54:
+/***/ 71:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 55:
+/***/ 72:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_shopcarNo__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_shopCarHav__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_shopcarNo__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_shopCarHav__ = __webpack_require__(77);
+var _this = this;
+
 //
 //
 //
@@ -99,13 +101,11 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
     return {
-      goodsList: {
-        saveHidden: true,
-        totalPrice: 0,
-        allSelect: true,
-        noSelect: false,
-        list: []
-      }
+      saveHidden: false,
+      totalPrice: 0,
+      allSelect: false,
+      noSelect: false,
+      goodsList: []
     };
   },
   components: {
@@ -113,53 +113,143 @@ if (false) {(function () {
     'shop-car-hav': __WEBPACK_IMPORTED_MODULE_1__components_shopCarHav__["a" /* default */]
   },
   onShow: function () {
+    this.initEleWidth();
+    this.cartShow();
     wx.getStorage({
       key: 'shopCarInfo',
       success: res => {
-        // console.log(res)
-        this.goodsList.list = res.data.shoplist;
-        console.log(this.goodsList.list[0].pic);
+        // var index = 
+        this.goodsList = res.data.shoplist;
+        console.log(this.goodsList);
       }
     });
+    // console.log(this.setGoodsList());
   },
   methods: {
-
-    //   saveGoodsList: function(saveHidden, total,   allSelect, noSelect, list){
-    //     this.goodsList =  {
-    //       saveHidden: saveHidden,
-    //       totalPrice: tatal,
-    //       allSelect: allSelect,
-    //       noSelect: noSelect,
-    //       list: list
-    //     };
-    //     var shopCarInfo = {};
-    //     var tempNumber = 0;
-    //     shopCarInfo.shoplist = list;
-    //     console.log(list);
-    //     for(var i = 0; i < list.length; i++){
-    //       tempNumber = tempNumber + list[i].number
-    //     }
-    //     shopCarInfo.shopNum = tempNumber;
-    //     wx.setStorage({
-    //       key: 'shopCarInfo',
-    //       data: shopCarInfo,
-    //   })
-    // },
+    //获取元素自适应后的实际宽度
+    getEleWidth: function (w) {
+      var real = 0;
+      try {
+        var res = wx.getSystemInfoSync().windowWidth;
+        var scale = 750 / 2 / (w / 2); //以宽度750px设计稿做宽度的自适应
+        // console.log(scale);
+        real = Math.floor(res / scale);
+        return real;
+      } catch (e) {
+        return false;
+        // Do something when catch error
+      }
+    },
+    initEleWidth: function () {
+      var delBtnWidth = this.getEleWidth(this.delBtnWidth);
+      this.delBtnWidth = delBtnWidth;
+    },
+    cartShow: function () {
+      var shoplist = [];
+      // 获取购物车数据
+      var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
+      if (shopCarInfoMem && shopCarInfoMem.shoplist) {
+        shoplist = shopCarInfoMem.shoplist;
+      }
+      // this.totalPrice()
+      this.goodsList = shoplist;
+      this.setGoodsList(this.getSaveHide, this.totalPrice, this.allSelect, this.noSelect, shoplist);
+    },
+    getSaveHide: function () {
+      var saveHidden = this.saveHidden;
+      return saveHidden;
+    },
+    allSelect: function () {
+      var list = this.goodsList;
+      var allSelect = false;
+      for (var i = 0; i < list.length; i++) {
+        var curItem = list[i];
+        if (curItem.active) {
+          allSelect = true;
+        } else {
+          allSelect = false;
+          break;
+        }
+      }
+      return allSelect;
+    },
+    noSelect: function () {
+      var list = this.goodsList;
+      var noSelect = false;
+      for (var i = 0; i < list.length; i++) {
+        var curItem = list[i];
+        if (curItem.active) {
+          noSelect = false;
+          break;
+        } else {
+          noSelect = false;
+        }
+      }
+      return noSelect;
+      /*return list.forEach((item) => {
+        if (item.active) {
+          return false
+        } else {
+          return true
+        }
+      })*/
+    },
+    totalPrice: function () {
+      var list = this.goodsList;
+      var total = 0;
+      for (var i = 0; i < list.length; i++) {
+        var curItem = list[i];
+        if (curItem.active) {
+          total += parseFloat(curItem.price) * curItem.number;
+        }
+      }
+      return total;
+    },
+    saveGoodsList: function (saveHidden, total, allSelect, noSelect, list) {
+      this.saveHidden = saveHidden, this.totalPrice = tatal, this.allSelect = allSelect, this.noSelect = noSelect, this.goodsList = list;
+      var shopCarInfo = {};
+      var tempNumber = 0;
+      shopCarInfo.shoplist = list;
+      console.log(list);
+      for (var i = 0; i < list.length; i++) {
+        tempNumber = tempNumber + list[i].number;
+      }
+      shopCarInfo.shopNum = tempNumber;
+      wx.setStorage({
+        key: 'shopCarInfo',
+        data: shopCarInfo
+      });
+    },
+    setGoodsList: (saveHidden, total, allSelect, noSelect, list) => {
+      _this.saveHidden = saveHidden, _this.totalPrice = total, _this.allSelect = allSelect, _this.noSelect = noSelect, _this.goodsList = list;
+      var shopCarInfo = {};
+      var tempNumber = 0;
+      shopCarInfo.shoplist = list;
+      console.log(list);
+      for (var i = 0; i < list.length; i++) {
+        tempNumber = tempNumber + list[i].number;
+      }
+      shopCarInfo.shopNum = tempNumber;
+      wx.setStorage({
+        key: "shopCarInfo",
+        data: shopCarInfo
+      });
+    }
   }
 });
 
 /***/ }),
 
-/***/ 56:
+/***/ 73:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_shopcarNo_vue__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_908f222a_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_shopcarNo_vue__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_shopcarNo_vue__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_908f222a_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_shopcarNo_vue__ = __webpack_require__(76);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(57)
+  __webpack_require__(74)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -204,14 +294,14 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 57:
+/***/ 74:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 58:
+/***/ 75:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -248,7 +338,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 59:
+/***/ 76:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -282,16 +372,16 @@ if (false) {
 
 /***/ }),
 
-/***/ 60:
+/***/ 77:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_shopCarHav_vue__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_64b3f603_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_shopCarHav_vue__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_shopCarHav_vue__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_64b3f603_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_shopCarHav_vue__ = __webpack_require__(80);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(61)
+  __webpack_require__(78)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -336,14 +426,14 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 61:
+/***/ 78:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 62:
+/***/ 79:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -397,50 +487,28 @@ var _this = this;
   },
   props: {
     goodsList: {
-      type: Object
+      type: Array
+    },
+    saveHidden: {
+      type: Boolean
+    },
+    totalPrice: {
+      type: Number
+    },
+    allSelect: {
+      type: Boolean
+    },
+    noSelect: {
+      type: Boolean
     }
   },
-  onShow: () => {
-    _this.initEleWidth();
-    _this.cartShow();
-    _this.list[index].pic;
-  },
   methods: {
-    //获取元素自适应后的实际宽度
-    getEleWidth: function (w) {
-      var real = 0;
-      try {
-        var res = wx.getSystemInfoSync().windowWidth;
-        var scale = 750 / 2 / (w / 2); //以宽度750px设计稿做宽度的自适应
-        // console.log(scale);
-        real = Math.floor(res / scale);
-        return real;
-      } catch (e) {
-        return false;
-        // Do something when catch error
-      }
-    },
-    initEleWidth: function () {
-      var delBtnWidth = this.getEleWidth(this.delBtnWidth);
-      this.delBtnWidth = delBtnWidth;
-    },
-    cartShow: function () {
-      var shoplist = [];
-      // 获取购物车数据
-      var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
-      if (shopCarInfoMem && shopCarInfoMem.shoplist) {
-        shoplist = shopCarInfoMem.shoplist;
-      }
-      // this.totalPrice()
-      this.goodsList.list = shoplist;
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), shoplist);
-    },
     getSaveHide: function () {
-      var saveHidden = this.goodsList.saveHidden;
+      var saveHidden = this.saveHidden;
       return saveHidden;
     },
     allSelect: function () {
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       var allSelect = false;
       for (var i = 0; i < list.length; i++) {
         var curItem = list[i];
@@ -454,7 +522,7 @@ var _this = this;
       return allSelect;
     },
     noSelect: function () {
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       var noSelect = false;
       for (var i = 0; i < list.length; i++) {
         var curItem = list[i];
@@ -475,7 +543,7 @@ var _this = this;
       })*/
     },
     totalPrice: function () {
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       var total = 0;
       for (var i = 0; i < list.length; i++) {
         var curItem = list[i];
@@ -484,21 +552,22 @@ var _this = this;
         }
       }
       return total;
+      // this.totalPrice = total;
     },
     toPayOrder(total) {
-      this.goodsList.totalPrice = total;
+      this.totalPrice = total;
     },
     selectTap(e) {
       var index = e.currentTarget.dataset.index;
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       if (index !== '' && index !== null) {
         list[parseInt(index)].active = !list[parseInt(index)].active;
-        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+        this.setGoodsList(this.getSaveHide(), this.total, this.allSelect, this.noSelect, list);
       }
     },
     bindAllSelect() {
-      var list = this.goodsList.list;
-      var currentAllSelect = this.goodsList.allSelect;
+      var list = this.goodsList;
+      var currentAllSelect = this.allSelect;
       if (currentAllSelect) {
         list.forEach(item => {
           item.active = false;
@@ -508,21 +577,16 @@ var _this = this;
           item.active = true;
         });
       }
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), !currentAllSelect, this.noSelect(), list);
+      this.setGoodsList(this.getSaveHide(), this.total, !currentAllSelect, this.noSelect, list);
     },
     saveHidden: function () {
-      return this.goodsList.saveHidden;
+      return this.saveHidden;
     },
     setGoodsList: function (saveHidden, total, allSelect, noSelect, list) {
-      this.goodsList = {
-        saveHidden: saveHidden,
-        totalPrice: total,
-        allSelect: allSelect,
-        noSelect: noSelect,
-        list: list
-      };
+      this.saveHidden = saveHidden, this.totalPrice = total, this.allSelect = allSelect, this.noSelect = noSelect, this.goodsList = list;
       var shopCarInfo = {};
       var tempNumber = 0;
+      var list = [];
       shopCarInfo.shoplist = list;
 
       for (var i = 0; i < list.length; i++) {
@@ -536,18 +600,18 @@ var _this = this;
     },
     increaseBtnTap(e) {
       var index = parseInt(e.currentTarget.dataset.index);
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       if (index !== null && index !== '') if (list[index].number < 10) {
         list[index].number++;
-        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+        this.setGoodsList(this.getSaveHide(), this.total, this.allSelect, this.noSelect, list);
       }
     },
     decreaseBtnTap(e) {
       var index = parseInt(e.currentTarget.dataset.index);
-      var list = this.oodsList.list;
+      var list = this.oodsList;
       if (index !== null && index !== '') if (list[index].number > 1) {
         list[index].number--;
-        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+        this.setGoodsList(this.getSaveHide(), this.total, this.allSelect, this.noSelect, list);
       }
     },
     touchS(e) {
@@ -570,7 +634,7 @@ var _this = this;
             left = `-${btnWidth}rpx`;
           }
         }
-        var list = this.goodsList.list;
+        var list = this.goodsList;
         if (index !== '' && index !== null) {
           list[index].left = "left";
           this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
@@ -586,7 +650,7 @@ var _this = this;
         var btnWidth = 120;
         disX >= btnWidth / 2 ? left = `-${btnWidth}rpx` : left = 0;
       }
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       if (index !== '' && index !== null) {
         list[index].left = left;
         this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
@@ -594,33 +658,33 @@ var _this = this;
     },
     delItem(e) {
       var index = e.currentTarget.dataset.index;
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       list.splice(index, 1);
       this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
     },
-    editTap() {
-      var list = this.goodsList.list;
+    editTap: () => {
+      var list = _this.goodsList;
       list.forEach(item => {
         item.active = false;
       });
-      this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+      _this.setGoodsList(!_this.getSaveHide(), _this.totalPrice(), _this.allSelect(), _this.noSelect(), list);
     },
     saveTap() {
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       list.forEach(item => {
         item.active = true;
       });
-      this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
     },
     deleteSelected() {
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       var newList = [];
       list.forEach(item => {
         if (!item.active) {
           newList.push(item);
         }
       });
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), newList);
+      this.setGoodsList(this.getSaveHide(), this.total, this.allSelect, this.noSelect, newList);
     },
     toPayOrder() {
       wx.showLoading();
@@ -671,7 +735,7 @@ var _this = this;
 
 /***/ }),
 
-/***/ 63:
+/***/ 80:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -687,16 +751,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_vm._v("购物车")]), _vm._v(" "), _c('div', {
     staticClass: "edit-btn",
     attrs: {
-      "hidden": !_vm.goodsList.saveHidden,
+      "hidden": _vm.saveHidden,
       "eventid": '0'
     },
     on: {
       "click": _vm.editTap
     }
-  }), _vm._v(" "), _c('div', {
+  }, [_vm._v("编辑")]), _vm._v(" "), _c('div', {
     staticClass: "edit-btn",
     attrs: {
-      "hidden": _vm.goodsList.saveHidden,
+      "hidden": !_vm.saveHidden,
       "eventid": '1'
     },
     on: {
@@ -707,7 +771,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, _vm._l((_vm.goodsList), function(list, index) {
     return _c('div', {
       key: index,
-      staticClass: "a-goods"
+      staticClass: "a-goods",
+      attrs: {
+        "data-index": _vm.dex
+      }
     }, [_c('div', {
       staticClass: "a-goods-conts",
       class: list.active ? 'active' : '',
@@ -752,7 +819,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "eventid": '2-' + index
       },
       on: {
-        "onClick": _vm.decreaseBtnTap
+        "click": _vm.decreaseBtnTap
       }
     }, [_vm._v("-")]), _vm._v(" "), _c('input', {
       attrs: {
@@ -768,7 +835,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "eventid": '3-' + index
       },
       on: {
-        "onClick": _vm.increaseBtnTap
+        "click": _vm.increaseBtnTap
       }
     }, [_vm._v("+")])])])]), _vm._v(" "), _c('div', {
       staticClass: "delete-btn",
@@ -777,7 +844,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "eventid": '4-' + index
       },
       on: {
-        "onClick": _vm.delItem
+        "click": _vm.delItem
       }
     }, [_vm._v("删除")])])])
   })), _vm._v(" "), _c('div', {
@@ -786,7 +853,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "left-price"
   }, [_c('div', {
     staticClass: "all-selected",
-    class: _vm.goodsList.allSelect ? 'active' : '',
+    class: _vm.allSelect ? 'active' : '',
     attrs: {
       "eventid": '6'
     },
@@ -798,10 +865,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "hidden": _vm.noSelect
     }
-  }, [_vm._v("合计：¥" + _vm._s(_vm.goodsList.totalPrice))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("合计：¥" + _vm._s(_vm.totalPrice))])]), _vm._v(" "), _c('div', {
     staticClass: "to-pay-btn",
     attrs: {
-      "hidden": !_vm.goodsList.saveHidden,
+      "hidden": _vm.saveHidden,
       "eventid": '7'
     },
     on: {
@@ -811,11 +878,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "to-pay-btn",
     class: _vm.noSelect ? 'no-select' : '',
     attrs: {
-      "hidden": _vm.goodsList.saveHidden,
+      "hidden": !_vm.saveHidden,
       "eventid": '8'
     },
     on: {
-      "click": _vm.deleteSelectd
+      "click": _vm.deleteSelected
     }
   }, [_vm._v("删除")])])])])
 }
@@ -832,14 +899,14 @@ if (false) {
 
 /***/ }),
 
-/***/ 64:
+/***/ 81:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "container"
-  }, [(_vm.goodsList.list.length <= 0) ? _c('div', [_c('shop-car-no', {
+  }, [(_vm.goodsList.length <= 0) ? _c('div', [_c('shop-car-no', {
     attrs: {
       "mpcomid": '0'
     }
@@ -863,5 +930,5 @@ if (false) {
 
 /***/ })
 
-},[52]);
+},[69]);
 //# sourceMappingURL=main.js.map

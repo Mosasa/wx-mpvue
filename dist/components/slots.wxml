@@ -1,9 +1,13 @@
 <import src="swiper$260774c2" />
 <import src="footerBox$4b951bd9" />
+<import src="card$cbab3812" />
 <import src="scroll$55755d18" />
 <import src="swiper$260774c2" />
 <import src="hotRecommend$031b4556" />
 <import src="hotList$46bb2af4" />
-<import src="card$cbab3812" />
+<import src="userHead$d829379c" />
+<import src="myOrder$d1cafc2a" />
+<import src="orderCell$8c0e590e" />
+<import src="addAddress$5787278c" />
 <import src="shopcarNo$051aa9a8" />
 <import src="shopCarHav$78cdda34" />

@@ -1,0 +1,14 @@
+<template name="myOrder$d1cafc2a">
+  <view class="_div data-v-2c428824 container">
+    <view class="_div data-v-2c428824 list" hover-class="none" data-tip="{{tip}}" data-url="{{url}}" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+      <view class="_div data-v-2c428824 list-icon-wrap">
+        <image src="{{icon}}" class="_img data-v-2c428824 list-icon"></image>
+      </view>
+      <view class="_div data-v-2c428824 list-text">{{text}}</view>
+      <view class="_div data-v-2c428824 arrow-wrap">{{tip}}
+        <image src="/static/images/accessory.png" class="_img data-v-2c428824 list-arrow"></image>
+      </view>
+    </view>
+    <view hidden="{{!cut?true:false}}" style="heigth: 23.44rpx" class="_div data-v-2c428824"></view>
+  </view>
+</template>

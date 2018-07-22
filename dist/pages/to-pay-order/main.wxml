@@ -1,0 +1,1 @@
+<import src="../../components/to-pay-order$70dea932" /><template is="to-pay-order$70dea932" data="{{ ...$root['0'], $root }}"/>

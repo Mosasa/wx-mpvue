@@ -1,16 +1,17 @@
 {
   "pages": [
-    "pages/index/main",
+    "pages/order/main",
     "pages/goods-details/main",
+    "pages/index/main",
     "pages/kinds/main",
     "pages/logs/main",
-    "pages/order/main",
-    "pages/mine/main"
+    "pages/mine/main",
+    "pages/to-pay-order/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ff3366",
-    "navigationBarTitleText": "电商购物商城",
+    "navigationBarTitleText": "线上书城",
     "navigationBarTextStyle": "#fff"
   },
   "tabBar": {

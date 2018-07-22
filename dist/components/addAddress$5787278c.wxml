@@ -1,0 +1,11 @@
+<template name="addAddress$5787278c">
+  <view class="_div data-v-75574f57 address-box" wx:if="{{isNeedLogistics > 0}}">
+    <view class="_div data-v-75574f57 add-address" hidden="{{curAddressData}}">
+      <view class="_div data-v-75574f57 title" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">新增收获地址</view>
+    </view>
+    <view class="_div data-v-75574f57 show-address" hidden="{{!curAddressData}}" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+      <view class="_div data-v-75574f57 name-tel">{{curAddressData.linkMan}} {{curAddressData.mobile}}</view>
+      <view class="_div data-v-75574f57 addr-text">{{curAddressData.address}}</view>
+    </view>
+  </view>
+</template>

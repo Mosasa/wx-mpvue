@@ -3,11 +3,11 @@
     <div class="shopBox">
       <div class="list-top">
         <div class="label">购物车</div>
-        <div class="edit-btn" @click="editTap" :hidden="!goodsList.saveHidden"></div>
-        <div class="edit-btn" @click="saveTap" :hidden="goodsList.saveHidden">完成</div>
+        <div class="edit-btn" @click="editTap" :hidden="saveHidden">编辑</div>
+        <div class="edit-btn" @click="saveTap" :hidden="!saveHidden">完成</div>
       </div>
       <div class="goodsList">
-        <div class="a-goods" v-for="(list,index) in goodsList" :key="index">
+        <div class="a-goods" v-for="(list,index) in goodsList" :key="index" :data-index="dex">
           <div class="a-goods-conts" :class="list.active ? 'active': ''" @click="selectTap" @touchstart="touchS" @touchmove="touchM" @touchend="touchE" :data-index="index" :style="{marginLeft:list.left}">
             <div class="goods-info">
               <div class="img-box">
@@ -18,23 +18,23 @@
                 <div class="goods-label">{{list.label}}</div>
                 <div class="goods-price">¥ {{list.price}}</div>
                 <div class="buy-num">
-                  <div class="decrease-btn" :class="list.number==1?'disabled':''" @onClick="decreaseBtnTap" :data-index="index">-</div>
+                  <div class="decrease-btn" :class="list.number==1?'disabled':''" @click="decreaseBtnTap" :data-index="index">-</div>
                   <input type="number" :value="list.number" disabled />
-                  <div class="increase-btn" :class="list.number==10?'disabled':''" @onClick="increaseBtnTap" :data-index="index">+</div>
+                  <div class="increase-btn" :class="list.number==10?'disabled':''" @click="increaseBtnTap" :data-index="index">+</div>
                 </div>
               </div>
             </div>
-            <div class="delete-btn" :data-index="index" @onClick="delItem">删除</div>
+            <div class="delete-btn" :data-index="index" @click="delItem">删除</div>
           </div>
         </div>
       </div>
       <div class="jiesuan-box">
         <div class="left-price">
-          <div class="all-selected" :class="goodsList.allSelect?'active':''" @click="bindAllSelect">全选</div>
-          <div class="total" :hidden="noSelect">合计：¥{{goodsList.totalPrice}}</div>
+          <div class="all-selected" :class="allSelect?'active':''" @click="bindAllSelect">全选</div>
+          <div class="total" :hidden="noSelect">合计：¥{{totalPrice}}</div>
         </div>
-        <div class="to-pay-btn" @click="toPayOrder" :hidden="!goodsList.saveHidden">去结算</div>
-        <div class="to-pay-btn" :class="noSelect?'no-select':''" :hidden="goodsList.saveHidden" @click="deleteSelectd">删除</div>
+        <div class="to-pay-btn" @click="toPayOrder" :hidden="saveHidden">去结算</div>
+        <div class="to-pay-btn" :class="noSelect?'no-select':''" :hidden="!saveHidden" @click="deleteSelected">删除</div>
       </div>
     </div>
   </div>
@@ -43,55 +43,32 @@
 export default {
   data(){
     return {
-      
     }
   },
   props:{
     goodsList: {
-      type: Object
-    }
-  },
-  onShow: () => {
-      this.initEleWidth();
-      this.cartShow();
-      this.list[index].pic
+      type: Array
+    },
+    saveHidden: {
+      type: Boolean
+    },
+    totalPrice: {
+      type: Number
+    },
+    allSelect: {
+      type: Boolean
+    },
+    noSelect: {
+      type: Boolean
+    },
   },
   methods: {
-    //获取元素自适应后的实际宽度
-    getEleWidth: function (w) {
-      var real = 0;
-      try {
-        var res = wx.getSystemInfoSync().windowWidth;
-        var scale = (750 / 2) / (w / 2);  //以宽度750px设计稿做宽度的自适应
-        // console.log(scale);
-        real = Math.floor(res / scale);
-        return real;
-      } catch (e) {
-        return false;
-       // Do something when catch error
-       }
-    },
-    initEleWidth: function () {
-      var delBtnWidth = this.getEleWidth(this.delBtnWidth);
-      this.delBtnWidth =  delBtnWidth
-    },
-    cartShow:function() {
-      var shoplist = [];
-      // 获取购物车数据
-      var shopCarInfoMem = wx.getStorageSync('shopCarInfo')
-      if (shopCarInfoMem && shopCarInfoMem.shoplist) {
-        shoplist = shopCarInfoMem.shoplist
-      }
-      // this.totalPrice()
-      this.goodsList.list = shoplist;
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), shoplist);
-    },
     getSaveHide: function () {
-      var saveHidden = this.goodsList.saveHidden;
+      var saveHidden = this.saveHidden;
       return saveHidden;
     },
     allSelect:function() {
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       var allSelect = false
       for (var i = 0; i < list.length; i++) {
         var curItem = list[i]
@@ -105,7 +82,7 @@ export default {
       return allSelect
     },
     noSelect: function(){
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       var noSelect = false
       for (var i = 0; i < list.length; i++) {
         var curItem = list[i]
@@ -126,7 +103,7 @@ export default {
       })*/
     },
     totalPrice: function () {
-      var list = this.goodsList.list;
+      var list = this.goodsList;
       var total = 0;
       for (var i = 0; i < list.length; i++) {
         var curItem = list[i];
@@ -134,22 +111,23 @@ export default {
           total += parseFloat(curItem.price) * curItem.number;
         }
       }
-      return total
+      return total;
+      // this.totalPrice = total;
     },
     toPayOrder(total) {
-      this.goodsList.totalPrice = total
+      this.totalPrice = total
     },
     selectTap(e) {
       var index = e.currentTarget.dataset.index
-      var list = this.goodsList.list
+      var list = this.goodsList
       if (index!=='' && index!==null){
         list[parseInt(index)].active = !list[parseInt(index)].active
-        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list)
+        this.setGoodsList(this.getSaveHide(), this.total, this.allSelect, this.noSelect, list)
       }
     },
     bindAllSelect() {
-      var list = this.goodsList.list;
-      var currentAllSelect = this.goodsList.allSelect
+      var list = this.goodsList;
+      var currentAllSelect = this.allSelect
       if (currentAllSelect) {
         list.forEach((item) => {
           item.active = false
@@ -159,21 +137,20 @@ export default {
           item.active = true
         })
       }
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), !currentAllSelect, this.noSelect(), list);
+      this.setGoodsList(this.getSaveHide(), this.total, !currentAllSelect, this.noSelect, list);
     },
     saveHidden:function() {
-      return this.goodsList.saveHidden
+      return this.saveHidden
     },
     setGoodsList: function (saveHidden, total,  allSelect, noSelect, list) {
-      this.goodsList = {
-        saveHidden: saveHidden,
-        totalPrice: total,
-        allSelect: allSelect,
-        noSelect: noSelect,
-        list: list
-      }
+      this.saveHidden = saveHidden,
+      this.totalPrice = total,
+      this.allSelect = allSelect,
+      this.noSelect = noSelect,
+      this.goodsList = list
       var shopCarInfo = {};
       var tempNumber = 0;
+      var list = [];
       shopCarInfo.shoplist = list;
 
       for (var i = 0; i < list.length; i++) {
@@ -187,20 +164,20 @@ export default {
     },
     increaseBtnTap(e){
       var index = parseInt(e.currentTarget.dataset.index)
-      var list = this.goodsList.list
+      var list = this.goodsList
       if (index !== null && index !== '')
         if (list[index].number<10) {
         list[index].number++
-        this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+        this.setGoodsList(this.getSaveHide(), this.total, this.allSelect, this.noSelect, list);
       }
     },
     decreaseBtnTap(e) {
       var index = parseInt(e.currentTarget.dataset.index)
-      var list = this.oodsList.list
+      var list = this.oodsList
       if (index !== null && index !== '')
         if (list[index].number > 1) {
           list[index].number--
-          this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+          this.setGoodsList(this.getSaveHide(), this.total, this.allSelect, this.noSelect, list);
         }
     },
     touchS(e) {
@@ -223,7 +200,7 @@ export default {
             left = `-${btnWidth}rpx`
           }
         }
-        var list = this.goodsList.list
+        var list = this.goodsList
         if (index !== '' && index!==null){
           list[index].left = "left"
           this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
@@ -239,7 +216,7 @@ export default {
         var btnWidth = 120
         disX >= btnWidth/2 ? left = `-${btnWidth}rpx` : left = 0
       }
-      var list = this.goodsList.list
+      var list = this.goodsList
       if (index !== '' && index !== null) {
         list[index].left = left
         this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
@@ -247,33 +224,33 @@ export default {
     },
     delItem(e) {
       var index = e.currentTarget.dataset.index
-      var list = this.goodsList.list
+      var list = this.goodsList
       list.splice(index,1)
       this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
     },
-    editTap(){
-      var list = this.goodsList.list
-      list.forEach((item)=>{
+    editTap:() => {
+      var list = this.goodsList
+      list.forEach(item =>{
         item.active = false
       })
       this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
     },
     saveTap(){
-      var list = this.goodsList.list
+      var list = this.goodsList
       list.forEach((item) => {
         item.active = true
       })
-      this.setGoodsList(!this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list); 
     },
     deleteSelected(){
-      var list = this.goodsList.list
+      var list = this.goodsList
       var newList = []
       list.forEach((item) => {
         if (!item.active) {
           newList.push(item)
         }
       })
-      this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), newList); 
+      this.setGoodsList(this.getSaveHide(), this.total, this.allSelect, this.noSelect, newList); 
     },
     toPayOrder(){
       wx.showLoading()
@@ -339,14 +316,22 @@ export default {
     padding: 0 30rpx;
     font-size: 28rpx;
     align-items: center;
-    background: #dd3366;
+    /* background: #dd3366; */
 }
 .list-top .label{
-    color: #000;
+    color: #ff3366;
+    font-size:46rpx;
+    margin-left:102rpx;
+    margin-top:26rpx;
+    font-weight: bold;
+
 }
 .list-top .edit-btn{
     color: #999;
     height: 100%;
+    margin-right:124rpx;
+    font-size:42rpx;
+    margin-top:32rpx;
 }
 .goodsList{
     width: 100%;

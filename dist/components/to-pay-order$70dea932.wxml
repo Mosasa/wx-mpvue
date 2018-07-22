@@ -1,0 +1,6 @@
+<import src="addAddress$5787278c" />
+<template name="to-pay-order$70dea932">
+  <view class="_div data-v-8117d1ac container">
+    <template data="{{...$root[$kk+'0'], $root}}" is="addAddress$5787278c"></template>
+  </view>
+</template>

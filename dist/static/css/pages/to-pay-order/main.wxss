@@ -1,0 +1,43 @@
+@import "/static/css/vendor.wxss";
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+.address-box {
+  width: 100%;
+  background: url(https://cdn.it120.cc/images/weappshop/arrow-right.png) no-repeat 705rpx center ,
+                url(https://cdn.it120.cc/images/weappshop/addr-line.png) no-repeat center bottom;
+  background-size: 16rpx auto,750rpx auto;
+  background-color: #fff;
+  margin: 20rpx 0;
+}
+.add-addres {
+  width: 100%;
+}
+.add-address .title {
+  font-size: 28rpx;
+  color: #000;
+  margin-left: 30rpx;
+  background: url(https://cdn.it120.cc/images/weappshop/ico-add-addr.png) no-repeat left center;
+  background-size: 60rpx auto;
+  padding: 40rpx 0 40rpx 90rpx;
+}
+.show-address {
+  width: 664rpx;
+  box-sizing: border-box;
+  padding-left: 100rpx;
+  background: url(https://cdn.it120.cc/images/weappshop/ico-addr.png) no-repeat 30rpx 35rpx;
+  background-size: 30rpx auto;
+}
+.show-address .name-tel {
+  font-size: 28rpx;
+  color: #000;
+  padding: 30rpx 0 20rpx 0;
+}
+.show-address .addr-text {
+  font-size: 24rpx;
+  color: #888;
+  padding-bottom: 34rpx;
+  line-height: 36rpx;
+}
