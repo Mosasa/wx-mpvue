@@ -50,54 +50,8 @@ router.post('/shop/goods/detail', async (ctx, next) => {//规定用post请求地
     })
   })
 })
-// 登录
-router.post('/user/login', async (ctx, next) => {
-  const params = ctx.request.body
-  const Users = db.db.model('Users', db.userSchema)
-  ctx.body = await new Promise((resolve, reject) => {
-    Users.findOne(params, (err, docs) => {
-      if (!docs) {
-        resolve({
-          err: -1,
-          errMsg: '密码或用户名错误'
-        })
-      }
-      resolve({
-        code: 0,
-        errMsg: 'success',
-        data: docs
-      })
-    })
-  })
-})
-
-// 注册
-router.post('/user/register', async (ctx, next) => {
-  const params = ctx.request.body
-  console.log(params)
-  const Users = db.db.model('Users', db.userSchema)
-  ctx.body = await new Promise((resolve, reject) => {
-    Users.findOne({username: params.username}, (err, docs) => {
-      if (docs) {
-        resolve({
-          code: -1,
-          errMsg: '用户名已注册'
-        })
-      } else {
-        Users.create(params, (err, docs) => {
-          resolve({
-            code: 0,
-            errMsg: 'success',
-            data: docs
-          })
-        })
-      }
-    })
-  })
-})
 
 router.post('/user/shipping-address/ilist', async (ctx, next) => {
-
   const params = ctx.request.body
   const Addresses = db.db.model('Addresses', db.addressSchema)
   ctx.body = await new Promise((resolve, reject) => {

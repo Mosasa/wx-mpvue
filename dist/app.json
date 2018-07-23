@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/order/main",
+    "pages/mine/main",
     "pages/goods-details/main",
     "pages/index/main",
     "pages/kinds/main",
     "pages/logs/main",
-    "pages/mine/main",
+    "pages/order/main",
     "pages/to-pay-order/main"
   ],
   "window": {

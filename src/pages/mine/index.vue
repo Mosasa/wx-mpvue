@@ -7,6 +7,9 @@
     <div>
       <order-cell></order-cell>
     </div>
+    <div>
+      <other-list></other-list>
+    </div>
   </div>
 </template>
 
@@ -14,6 +17,7 @@
 import userHead from '@/components/userHead'
 import myOrder from '@/components/myOrder'
 import orderCell from '@/components/orderCell'
+import otherList from '@/components/otherList'
 export default {
   data() {
     return {
@@ -25,7 +29,8 @@ export default {
   components: {
     'user-head': userHead,
     'my-order': myOrder,
-    'order-cell': orderCell
+    'order-cell': orderCell,
+    'other-list': otherList
   },
   onShow() {
     var app = getApp();

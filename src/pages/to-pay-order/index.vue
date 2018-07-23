@@ -16,19 +16,48 @@ export default {
   components: {
     'add-address': addAddress
   },
- onShow: function(){
-    this.initShippingAddress();
-    console.log('lalala')
+ onLoad: function(options) {
+   wx.getStorage({
+      key: 'shopCarInfo',
+      success: (res) =>{
+        // success
+        console.log(`initshopCarInfo:${res.data}`)
+        this.shopCarInfo = res.data;
+        this.shopNum = res.data.shopNum
+      }
+    })
+    let that = this;
+  wx.request({
+      url: 'http://localhost:3030/user/shipping-address/list',
+      method: 'POST',
+      data: {
+        uid: options._id
+      },
+      success: function(res) {
+        if(res.data.code == 0) {
+          let defaultAddresses = res.data.data.filter(item => item.isDefault);
+          that.curAddressData = defaultAddresses ? defaultAddresses[0] : null
+        }else {
+          that.curAddressData = null
+        }
+        // that.processYunfei();
+      }
+    })
+ } ,
+ onShow: function(options){
+   console.log(options)
+    // this.initShippingAddress();
   },
   methods:{
-    initShippingAddress() {
+    initShippingAddress(options) {
     let that = this;
-    console.log("xixixi")
+    // var app = getApp();
+    console.log(options)
     wx.request({
       url: 'http://localhost:3030/user/shipping-address/list',
       method: 'POST',
       data: {
-        uid: app.globalData.user._id
+        uid: options._id
       },
       success: function(res) {
         if(res.data.code == 0) {

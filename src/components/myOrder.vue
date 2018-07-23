@@ -27,17 +27,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .list {
   width: 750rpx;
   background: #f8f8f8;
   height: 120.77rpx;
   line-height: 120.77rpx;
   padding: 0 35.15rpx;
-  border: 1px solid #f8f8f8;
+  border: 1px solid #e8e8e8;
   background: #fff;
   font-size: 32.81rpx;
-  margin-top: -422rpx;
+  margin-top: -422rpx;	
 }
 .list-icon-wrap {
   float: left;

@@ -1,0 +1,14 @@
+<template name="otherList$b855db12">
+  <view class="_div data-v-5672d7ba container">
+    <view class="_div data-v-5672d7ba list" wx:key="item" key="{{item}}" hover-class="none" data-tip="{{tip}}" data-url="{{url}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{list}}" wx:for-index="index" wx:for-item="item">
+      <view class="_div data-v-5672d7ba list-icon-wrap">
+        <image src="{{item.icon}}" class="_img data-v-5672d7ba list-icon"></image>
+      </view>
+      <view class="_div data-v-5672d7ba list-text">{{item.text}}</view>
+      <view class="_div data-v-5672d7ba arrow-wrap">{{item.tip}}
+        <image src="/static/images/accessory.png" class="_img data-v-5672d7ba list-arrow"></image>
+      </view>
+    </view>
+    <view hidden="{{!cut?true:false}}" style="heigth: 23.44rpx" class="_div data-v-5672d7ba"></view>
+  </view>
+</template>
