@@ -3,7 +3,6 @@ const db = require('../db')
 
 // 获取商品列表
 router.post('/shop/goods/list', async (ctx, next) => {
-
   const params = ctx.request.body
   //以‘listSchema’的模型去取到Goods的数据
   const Goods = db.db.model('Goods', db.listSchema) //第一个‘db’是require来的自定义的，第二个‘db’是取到连接到mongodb的数据库，model代指实体数据(根据schema获取该字段下的数据，然后传给Goods))
@@ -51,8 +50,9 @@ router.post('/shop/goods/detail', async (ctx, next) => {//规定用post请求地
   })
 })
 
-router.post('/user/shipping-address/ilist', async (ctx, next) => {
-  const params = ctx.request.body
+router.post('/user/shipping-address/list', async (ctx, next) => {
+  const params = ctx.request.body;
+  console.log('lalala');
   const Addresses = db.db.model('Addresses', db.addressSchema)
   ctx.body = await new Promise((resolve, reject) => {
     if (params.id) {

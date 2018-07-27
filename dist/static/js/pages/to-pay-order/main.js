@@ -1,13 +1,124 @@
 global.webpackJsonp([4],{
 
-/***/ 86:
+/***/ 100:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 101:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  props: {
+    isNeedLogistics: {
+      type: Number
+    },
+    curAddressData: {
+      type: Boolean
+    }
+    // yunPrice: Number,
+  }
+});
+
+/***/ }),
+
+/***/ 102:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (_vm.isNeedLogistics > 0) ? _c('div', {
+    staticClass: "address-box"
+  }, [_c('div', {
+    staticClass: "add-address",
+    attrs: {
+      "hidden": _vm.curAddressData
+    }
+  }, [_c('div', {
+    staticClass: "title",
+    attrs: {
+      "eventid": '0'
+    },
+    on: {
+      "click": _vm.addAddress
+    }
+  }, [_vm._v("新增收获地址")])]), _vm._v(" "), _c('div', {
+    staticClass: "show-address",
+    attrs: {
+      "hidden": !_vm.curAddressData,
+      "eventid": '1'
+    },
+    on: {
+      "click": _vm.selectAddress
+    }
+  }, [_c('div', {
+    staticClass: "name-tel"
+  }, [_vm._v(_vm._s(_vm.curAddressData.linkMan) + " " + _vm._s(_vm.curAddressData.mobile))]), _vm._v(" "), _c('div', {
+    staticClass: "addr-text"
+  }, [_vm._v(_vm._s(_vm.curAddressData.address))])])]) : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-75574f57", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 103:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container"
+  }, [_c('add-address', {
+    attrs: {
+      "mpcomid": '0'
+    }
+  })], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-8117d1ac", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 95:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(96);
 
 
 
@@ -16,16 +127,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 87:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_8117d1ac_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_8117d1ac_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(103);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(88)
+  __webpack_require__(97)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -70,18 +181,18 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 88:
+/***/ 97:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 89:
+/***/ 98:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_addAddress__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_addAddress__ = __webpack_require__(99);
 //
 //
 //
@@ -159,16 +270,16 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 90:
+/***/ 99:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_addAddress_vue__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_75574f57_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_addAddress_vue__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_addAddress_vue__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_75574f57_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_addAddress_vue__ = __webpack_require__(102);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(91)
+  __webpack_require__(100)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -211,118 +322,7 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
 
-/***/ }),
-
-/***/ 91:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 92:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  props: {
-    isNeedLogistics: {
-      type: Number
-    },
-    curAddressData: {
-      type: Boolean
-    }
-    // yunPrice: Number,
-  }
-});
-
-/***/ }),
-
-/***/ 93:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.isNeedLogistics > 0) ? _c('div', {
-    staticClass: "address-box"
-  }, [_c('div', {
-    staticClass: "add-address",
-    attrs: {
-      "hidden": _vm.curAddressData
-    }
-  }, [_c('div', {
-    staticClass: "title",
-    attrs: {
-      "eventid": '0'
-    },
-    on: {
-      "click": _vm.addAddress
-    }
-  }, [_vm._v("新增收获地址")])]), _vm._v(" "), _c('div', {
-    staticClass: "show-address",
-    attrs: {
-      "hidden": !_vm.curAddressData,
-      "eventid": '1'
-    },
-    on: {
-      "click": _vm.selectAddress
-    }
-  }, [_c('div', {
-    staticClass: "name-tel"
-  }, [_vm._v(_vm._s(_vm.curAddressData.linkMan) + " " + _vm._s(_vm.curAddressData.mobile))]), _vm._v(" "), _c('div', {
-    staticClass: "addr-text"
-  }, [_vm._v(_vm._s(_vm.curAddressData.address))])])]) : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-75574f57", esExports)
-  }
-}
-
-/***/ }),
-
-/***/ 94:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [_c('add-address', {
-    attrs: {
-      "mpcomid": '0'
-    }
-  })], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-8117d1ac", esExports)
-  }
-}
-
 /***/ })
 
-},[86]);
+},[95]);
 //# sourceMappingURL=main.js.map

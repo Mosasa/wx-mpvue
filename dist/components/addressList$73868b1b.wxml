@@ -1,0 +1,12 @@
+<template name="addressList$73868b1b">
+  <view class="_div data-v-146fe8c4 container">
+    <view class="_div data-v-146fe8c4 address-list">
+      <view class="_div data-v-146fe8c4 a-address" wx:key="index" key="{{index}}" wx:for="{{addressList}}" wx:for-index="index" wx:for-item="item">
+        <view class="_div data-v-146fe8c4 left-text {{item.isDefault ? 'active' : ''}}" bindtap="handleProxy" data-id="{{item._id}}" data-index="{{index}}" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}">
+          <view class="_div data-v-146fe8c4 name-tel"> {{item.linkMan}} {{item.mobile}} </view>
+          <view class="_div data-v-146fe8c4 address-box"> {{item.address}} </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

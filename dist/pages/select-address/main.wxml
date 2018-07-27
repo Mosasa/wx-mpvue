@@ -1,0 +1,1 @@
+<import src="../../components/select-address$7c32cb9a" /><template is="select-address$7c32cb9a" data="{{ ...$root['0'], $root }}"/>

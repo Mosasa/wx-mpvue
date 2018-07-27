@@ -38,7 +38,7 @@ export default {
           text: "分类"
         },
         {
-          pagePath: "pages/order/main",
+          pagePath: "pages/shop-cart/main",
           iconPath: "static/images/order.png",
           selectedIconPath: "static/images/order1.png",
           text: "购物车",

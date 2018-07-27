@@ -137,7 +137,7 @@ export default {
           item.active = true
         })
       }
-      this.setGoodsList(this.getSaveHide(), this.total, !currentAllSelect, this.noSelect, list);
+      this.setGoodsList(this.getSaveHide(), this.totalPrice(), !currentAllSelect, this.noSelect(), list);
     },
     saveHidden:function() {
       return this.saveHidden

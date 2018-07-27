@@ -1,0 +1,6 @@
+<import src="addressList$73868b1b" />
+<template name="select-address$7c32cb9a">
+  <view class="_div data-v-4e9e2136 container">
+    <template data="{{...$root[$kk+'0'], $root}}" is="addressList$73868b1b"></template>
+  </view>
+</template>
